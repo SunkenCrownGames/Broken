@@ -29,7 +29,12 @@ namespace V1
             UpdateInput();
             UpdateVelocity();
             Jump();
-            Move();
+            DashTrigger();
+
+            if(m_playerMovementState != PlayerMovementState.DASHING)
+                Move();
+            else
+                Dash();
         }
 
         private void BindObjects()
@@ -107,6 +112,21 @@ namespace V1
             }
         }
 
+        private void DashTrigger()
+        {
+            if(m_playerMovementState != PlayerMovementState.DASHING)
+            {
+                if(Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    m_playerMovementState = PlayerMovementState.DASHING;
+                    
+                    float direction = (m_entity.HorizontalDirection == EntityHorizontalDirection.LEFT) ? -1 : 1.0f;
+                    m_playerData.DashInfo.DashDestination = transform.position.x + (m_playerData.DashInfo.DashLength * direction);
+                    m_entity.GameManagerRef.CurrencyEvent.Invoke(-m_playerData.CostData.DashCost);
+                }
+            }
+        }
+
         private void Move() 
         {
             //Debug.Log(m_vVelocity);
@@ -120,10 +140,45 @@ namespace V1
 
         }
 
+        private void Dash()
+        {
+            //Debug.Log("Dashing");
+            
+            float xPos = transform.position.x;
+
+            float horizontalSpeed = (m_entity.HorizontalDirection == EntityHorizontalDirection.LEFT) ? -m_playerData.DashInfo.DashSpeed : m_playerData.DashInfo.DashSpeed;
+
+            transform.position += new Vector3(horizontalSpeed * Time.deltaTime, m_playerData.VerticalSpeed  * Time.deltaTime);
+
+            if(m_entity.HorizontalDirection == EntityHorizontalDirection.LEFT)
+            {
+               if(xPos < m_playerData.DashInfo.DashDestination)
+               {
+                   //Debug.Log("Dash Ended");
+                   m_playerMovementState = (m_horizontalInput != 0) ? PlayerMovementState.RUNNING : PlayerMovementState.IDLE;
+               } 
+            }
+            else
+            {
+                if(xPos > m_playerData.DashInfo.DashDestination)
+                {
+                    Debug.Log("Dash Ended");
+                    m_playerMovementState = (m_horizontalInput != 0) ? PlayerMovementState.RUNNING : PlayerMovementState.IDLE;
+                } 
+            }
+
+        }
+
         private void UpdateMovementState()
         {
             if(m_horizontalInput != 0)
+            {
                 m_playerMovementState = PlayerMovementState.RUNNING;
+                if(m_horizontalInput == 1)
+                    m_entity.HorizontalDirection = EntityHorizontalDirection.RIGHT;
+                else
+                    m_entity.HorizontalDirection = EntityHorizontalDirection.LEFT;
+            }
             else
                 m_playerMovementState = PlayerMovementState.IDLE;  
         }
@@ -137,6 +192,7 @@ namespace V1
     public enum PlayerMovementState
     {
         IDLE,
-        RUNNING
+        RUNNING,
+        DASHING
     }
 }

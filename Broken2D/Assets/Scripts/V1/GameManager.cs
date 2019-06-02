@@ -88,7 +88,7 @@ namespace V1
             m_currency += val;
             Debug.Log("Currency Updated + Current Value is: " + m_currency);
 
-            if(m_currency == 0)
+            if(m_currency <= 0)
             {
                 Debug.Log("Game Over");
                 Destroy(m_playerRef.gameObject);

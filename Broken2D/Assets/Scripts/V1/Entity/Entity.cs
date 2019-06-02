@@ -13,6 +13,8 @@ namespace V1
         private EntityActionState m_actionState;
         [SerializeField]
         private EntityVerticalDirection m_verticalDirection;
+        [SerializeField]
+        private EntityHorizontalDirection m_horizontalDirection = EntityHorizontalDirection.RIGHT;
 
         [SerializeField]
         private float m_groundedDistance = 0;
@@ -71,6 +73,10 @@ namespace V1
                 {
                     Grounded(null);
                 }
+            }
+            else
+            {
+                Grounded(null);
             }
         }
 
@@ -135,6 +141,17 @@ namespace V1
             get { return m_ground; }
             set { m_ground = value; }
         }
+        
+        public EntityHorizontalDirection HorizontalDirection
+        {
+            get { return m_horizontalDirection; }
+            set { 
+                    if(m_horizontalDirection != value)
+                    {
+                        m_horizontalDirection = value; 
+                    }
+                }
+        }
     }
 
     public enum EntityType
@@ -164,5 +181,11 @@ namespace V1
         RISING,
         FALLING,
         NONE
+    }
+
+    public enum EntityHorizontalDirection
+    {
+        LEFT,
+        RIGHT
     }
 }

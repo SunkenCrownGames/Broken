@@ -44,6 +44,9 @@ namespace V1
         [SerializeField]
         private AbilityCostData m_abilityCostData;
 
+        [SerializeField]
+        private DashData m_dashData;
+
 
 
         public float MovementSpeed
@@ -123,6 +126,12 @@ namespace V1
         {
             get { return m_abilityCostData; }
             set { m_abilityCostData = value; }
+        }
+
+        public DashData DashInfo
+        {
+            get { return m_dashData; }
+            set { m_dashData = value; }
         }
     }
 }
