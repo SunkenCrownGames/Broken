@@ -2,14 +2,14 @@
 # Broken2D Unity Project
 
 ## Implemented Features
-* Full Working 2D Controller (Walking, Jumping, Falling)\
-* Walking Reduces Energy\
-* Jumping Reduces Energy\
+* Full Working 2D Controller (Walking, Jumping, Falling)
+* Walking Reduces Energy
+* Jumping Reduces Energy
 
 ## Version 1 Features:
 ~~Full Working 2D Controller (Walking, Jumping, Falling)~~\
 ~~Walking Reduces Energy~~\
-~~Jumping Reduces Energy,~~\
+~~Jumping Reduces Energy~~
 
 ## Version 2 Features To Implement
 Dash Ability\
