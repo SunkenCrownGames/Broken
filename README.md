@@ -20,7 +20,7 @@ Enemy Drop Energy On Death
 Energy Dropped get sucked by the plyer
 
 ## Version 3 Features To Implement
-~~Shooting~~
+~~Shooting~~\
 ~~Shooting Reduce Energy~~
 
 ## Version 2 Features To Implement
