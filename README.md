@@ -21,7 +21,7 @@ Enemy Controller\
 Patrolling Enemy\
 Enemy Hit Loses Health\
 Enemy Drop Energy On Death\
-Energy Dropped get sucked by the plyer
+Energy Dropped get sucked by the Player
 
 ## Version 3 Features To Implement
 ~~Shooting~~\
