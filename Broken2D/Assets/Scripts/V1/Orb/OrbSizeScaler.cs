@@ -11,13 +11,13 @@ namespace V1
         private float m_initialScale = 1;
 
         [SerializeField]
-         private float m_minScale = 1;
+         private float m_minScale = 0.5f;
 
         [SerializeField]
-        private float m_maxScale = 1;
+        private float m_maxScale = 2;
 
         [SerializeField]
-        private float m_energyToScaleRatio = 100;
+        private float m_energyToScaleRatio = 500;
 
         private float m_currentScale = 0;
 

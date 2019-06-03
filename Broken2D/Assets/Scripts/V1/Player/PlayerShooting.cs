@@ -6,10 +6,10 @@ namespace V1
     {
         
         [SerializeField]
-        private GameObject m_bullet;
+        private GameObject m_bullet = null;
 
         [SerializeField]
-        private GameObject m_bulletSpawnObject;
+        private GameObject m_bulletSpawnObject = null;
 
         [SerializeField]
         private ShootingMode m_shootingMode = ShootingMode.TRIGGER;

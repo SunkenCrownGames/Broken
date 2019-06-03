@@ -11,12 +11,16 @@
 * Scale Orb by size depending on the amount of energy contained
 * Shooting
 * Shooting Reduce Energy
+* Enemy Skeleton
 
 
 ## Version 4 Features To Implement
-Patrolling Enemy
-Enemy Hit Loses Health
-Enemy Drop Energy On Death
+~~Enemy Skeleton~~\
+EnemyData
+Enemy Controller\
+Patrolling Enemy\
+Enemy Hit Loses Health\
+Enemy Drop Energy On Death\
 Energy Dropped get sucked by the plyer
 
 ## Version 3 Features To Implement
