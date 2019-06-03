@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 namespace V1
 {
@@ -8,6 +9,8 @@ namespace V1
     {
 
         public PlayerController m_playerRef;
+        public TextMeshProUGUI m_currencyValDebug;
+        public bool m_debugMode;
 
         [SerializeField]
         private float m_startCurrency = 0.0f;
@@ -41,7 +44,8 @@ namespace V1
             //GAMEPLAY
             if (Application.IsPlaying(gameObject))
             {
-                
+                if(m_debugMode)
+                    m_currencyValDebug.text = m_currency.ToString();
             }
             //IN EDITOR
             else
@@ -92,6 +96,7 @@ namespace V1
             {
                 Debug.Log("Game Over");
                 Destroy(m_playerRef.gameObject);
+                m_currency = 0;
             }
         }
 

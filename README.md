@@ -16,7 +16,8 @@
 ## Version 2 Features To Implement
 ~~Dash Ability~~\
 ~~Dash Ability Reduce Energy~~\
-Orbs To Increase Energy (Scale by size depending on the amount of energy)
+~~Orbs To Increase Energy~~\
+Scale Orb by size depending on the amount of energy contained
 
 
 ## BUGS:
