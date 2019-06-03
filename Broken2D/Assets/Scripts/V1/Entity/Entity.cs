@@ -63,7 +63,7 @@ namespace V1
                 float distance = m_bounds.EntityVerticalBounds[0] - objectBounds.EntityVerticalBounds[1];
                 if(hit.distance < m_groundedDistance && m_movementState == EntityMovementState.FALLING && m_verticalDirection == EntityVerticalDirection.FALLING)
                 {
-                    Debug.Log("SET GROUNDED");
+                    //Debug.Log("SET GROUNDED");
                     if(hitObject.CompareTag("Ground"))
                     {
                         Grounded(hitObject);
@@ -152,40 +152,5 @@ namespace V1
                     }
                 }
         }
-    }
-
-    public enum EntityType
-    {
-        PLAYER,
-        ENEMY
-    }
-
-
-    public enum EntityMovementState
-    {
-        NONE,
-        GROUNDED,
-        JUMPING,
-        FALLING,
-    }
-
-    public enum EntityActionState
-    {
-        NONE,
-        HIT,
-        ATTACK
-    }
-
-    public enum EntityVerticalDirection
-    {
-        RISING,
-        FALLING,
-        NONE
-    }
-
-    public enum EntityHorizontalDirection
-    {
-        LEFT,
-        RIGHT
     }
 }

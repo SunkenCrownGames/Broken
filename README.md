@@ -8,6 +8,9 @@
 * Dash Ability
 * Dash Ability Reduce Energy
 * Orbs To Increase Energy
+* Scale Orb by size depending on the amount of energy contained
+* Shooting
+* Shooting Reduce Energy
 
 
 ## Version 4 Features To Implement
@@ -17,14 +20,14 @@ Enemy Drop Energy On Death
 Energy Dropped get sucked by the plyer
 
 ## Version 3 Features To Implement
-Shooting
-Shooting Reduce Energy
+~~Shooting~~
+~~Shooting Reduce Energy~~
 
 ## Version 2 Features To Implement
 ~~Dash Ability~~\
 ~~Dash Ability Reduce Energy~~\
 ~~Orbs To Increase Energy~~\
-Scale Orb by size depending on the amount of energy contained
+~~Scale Orb by size depending on the amount of energy contained~~
 
 ## Version 1 Features To Implement:
 ~~Full Working 2D Controller (Walking, Jumping, Falling)~~\

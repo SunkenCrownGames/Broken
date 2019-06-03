@@ -188,11 +188,4 @@ namespace V1
             get { return m_playerData; }
         }
     }
-
-    public enum PlayerMovementState
-    {
-        IDLE,
-        RUNNING,
-        DASHING
-    }
 }

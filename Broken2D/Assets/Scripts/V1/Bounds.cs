@@ -5,7 +5,7 @@ namespace V1
     public class Bounds : MonoBehaviour
     {
         [SerializeField]
-        private bool m_updateEveryFrame;
+        private bool m_updateEveryFrame = false;
         private SpriteRenderer m_sprite;
         float[] m_hBounds = new float[2];
         float[] m_vBounds = new float[2];
