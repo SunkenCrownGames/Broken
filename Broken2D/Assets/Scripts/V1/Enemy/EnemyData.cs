@@ -23,6 +23,12 @@ namespace V1
         [SerializeField]
         private float m_maxFallSpeed;
 
+        [SerializeField]
+        private float m_detectionRange;
+
+        [SerializeField]
+        private float m_attackRange;
+
         public float MovementSpeed
         {
             get { return m_movementSpeed; }
@@ -59,6 +65,18 @@ namespace V1
             set { m_enemyType = value; }
         }
 
+        public float DetectionRange
+        {
+            get { return m_detectionRange; }
+            set { m_detectionRange = value; }
+        }
+        
+
+        public float AttackRange
+        {
+            get { return m_attackRange; }
+            set { m_attackRange = value; }
+        }
 
 
     }

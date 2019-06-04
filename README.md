@@ -15,6 +15,8 @@
 * EnemyData
 * Enemy Controller
 * Patrolling Enemy
+* Chase/Stop Chasing Player
+* Enemy Hit Loses Health
 
 
 ## Version 4 Features To Implement
@@ -22,7 +24,8 @@
 ~~EnemyData~~\
 ~~Enemy Controller~~\
 ~~Patrolling Enemy~~\
-Enemy Hit Loses Health\
+~~Chase/Stop Chasing Player~~\
+~~Enemy Hit Loses Health~~\
 Enemy Drop Energy On Death\
 Energy Dropped get sucked by the Player
 

@@ -12,7 +12,13 @@ namespace V1
         [SerializeField]
         private PatrolData m_patrolData = null;
 
+
+        private int m_playerLayer = 0;
+
         private Bounds m_bounds;
+
+        [SerializeField]
+        private static GameObject m_player;
         
         
         private void Awake() 
@@ -26,8 +32,15 @@ namespace V1
 
             if(m_entity.Ground != null)
             {
-                Patrol();
-                Detect();
+                if(m_enemyData.EnemyInfo == EnemyType.PATROL)
+                {
+                    if(m_patrolData.CurrentStatus != PatrolStatus.CHASING)
+                        Patrol();
+                    else
+                        Chase();
+
+                    Detect();
+                }
             }
 
             Move();
@@ -37,6 +50,8 @@ namespace V1
         {
             m_entity = GetComponent<Entity>();
             m_bounds = GetComponent<Bounds>();
+            m_playerLayer = LayerMask.GetMask("PLAYER");
+            m_player = GameObject.FindGameObjectWithTag("Player");
         }
 
         private void UpdateVelocity()
@@ -81,9 +96,41 @@ namespace V1
             }
         }
 
+        private void Chase()
+        {
+            float xPlayerPos = m_player.transform.position.x;
+            float xCurrentPos = transform.position.x;
+            float distance = Mathf.Abs(xCurrentPos - xPlayerPos);
+
+            GameObject m_playerGround = m_player.GetComponent<Entity>().Ground;
+
+            if(distance > m_enemyData.AttackRange)
+            {
+                m_entity.HorizontalDirection = (xCurrentPos < xPlayerPos) ? EntityHorizontalDirection.RIGHT : EntityHorizontalDirection.LEFT;
+                m_enemyData.Direction = (xCurrentPos < xPlayerPos) ? 1 : -1;
+            }
+            else
+            {
+                m_enemyData.Direction = 0;
+            }
+
+            if(m_entity.Ground == m_playerGround && m_playerGround != null)
+            {
+                m_patrolData.CurrentStatus = PatrolStatus.PATROLLING;
+            }
+        }
+
         private void Detect()
         {
-            
+            Debug.DrawLine(transform.position, transform.position + new Vector3(m_enemyData.DetectionRange, 0 ,0), Color.red);
+            RaycastHit2D hit = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? 
+            Physics2D.Raycast(transform.position, Vector2.right, m_enemyData.DetectionRange, m_playerLayer) :
+            Physics2D.Raycast(transform.position, -Vector2.right, m_enemyData.DetectionRange, m_playerLayer);
+            if (hit.collider != null)
+            {
+                GameObject hitObject = hit.collider.gameObject;
+                m_patrolData.CurrentStatus = PatrolStatus.CHASING;
+            }
         }
 
         private void Move()

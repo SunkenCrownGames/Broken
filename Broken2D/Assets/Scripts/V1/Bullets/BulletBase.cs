@@ -18,6 +18,9 @@ namespace V1
 
         [SerializeField]
         protected float m_bulletDirection;
+
+        [SerializeField]
+        protected float m_bulletDamage;
         
 
         public float Speed
@@ -49,6 +52,12 @@ namespace V1
         {
             get { return m_bulletDirection; }
             set { m_bulletDirection = value; }
+        }
+
+        public float BulletDamage
+        {
+            get { return m_bulletDamage; }
+            set { m_bulletDamage = value; }
         }
     }
 }
