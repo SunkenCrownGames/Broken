@@ -56,11 +56,13 @@ namespace V1
         private void CheckGrounded()
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, m_groundLayerMask);
+
             if (hit.collider != null && transform.position.y > hit.point.y)
             {
                 GameObject hitObject = hit.collider.gameObject;
                 Bounds objectBounds = hitObject.GetComponent<Bounds>();
                 float distance = m_bounds.EntityVerticalBounds[0] - objectBounds.EntityVerticalBounds[1];
+
                 if(hit.distance < m_groundedDistance && m_movementState == EntityMovementState.FALLING && m_verticalDirection == EntityVerticalDirection.FALLING)
                 {
                     //Debug.Log("SET GROUNDED");

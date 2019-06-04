@@ -30,10 +30,10 @@ namespace V1
         private void UpdateBounds()
         {
             m_hBounds[0] = transform.position.x - m_sprite.bounds.extents.x;
-            m_hBounds[1] = transform.position.x - m_sprite.bounds.extents.x;
+            m_hBounds[1] = transform.position.x + m_sprite.bounds.extents.x;
 
             m_vBounds[0] = transform.position.y - m_sprite.bounds.extents.y;
-            m_vBounds[1] = transform.position.y - m_sprite.bounds.extents.y;
+            m_vBounds[1] = transform.position.y + m_sprite.bounds.extents.y;
         }
 
         public float[] EntityVerticalBounds

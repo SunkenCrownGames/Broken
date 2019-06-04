@@ -16,9 +16,9 @@
 
 ## Version 4 Features To Implement
 ~~Enemy Skeleton~~\
-EnemyData
-Enemy Controller\
-Patrolling Enemy\
+~~EnemyData~~\
+~Enemy Controller~~\
+~~Patrolling Enemy~~\
 Enemy Hit Loses Health\
 Enemy Drop Energy On Death\
 Energy Dropped get sucked by the Player
