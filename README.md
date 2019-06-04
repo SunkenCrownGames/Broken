@@ -12,12 +12,15 @@
 * Shooting
 * Shooting Reduce Energy
 * Enemy Skeleton
+* EnemyData
+* Enemy Controller
+* Patrolling Enemy
 
 
 ## Version 4 Features To Implement
 ~~Enemy Skeleton~~\
 ~~EnemyData~~\
-~Enemy Controller~~\
+~~Enemy Controller~~\
 ~~Patrolling Enemy~~\
 Enemy Hit Loses Health\
 Enemy Drop Energy On Death\
