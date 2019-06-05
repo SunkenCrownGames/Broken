@@ -17,7 +17,18 @@
 * Patrolling Enemy
 * Chase/Stop Chasing Player
 * Enemy Hit Loses Health
+* Enemy Drop Energy On Death
+* Energy Dropped get sucked by the Player
+* Energy Straigh Tracking From Player To Enemy~
 
+## Version 5 Features To Implement
+~~Energy Straigh Tracking From Player To Enemy~~\
+Bezier Curve Tracking From Player To Enemy\
+Seeking Enemy -> Goes Towards Player And Suicides\
+ScreenShake On Enemy Hit (Small)\
+ScreenShake On Enemy Death (Major)\
+ScreenShake On Player Hit (Small)\
+ScreenShake On Player Death (Major)\
 
 ## Version 4 Features To Implement
 ~~Enemy Skeleton~~\
@@ -26,8 +37,8 @@
 ~~Patrolling Enemy~~\
 ~~Chase/Stop Chasing Player~~\
 ~~Enemy Hit Loses Health~~\
-Enemy Drop Energy On Death\
-Energy Dropped get sucked by the Player
+~~Enemy Drop Energy On Death~~\
+~~Energy Dropped get sucked by the Player~~
 
 ## Version 3 Features To Implement
 ~~Shooting~~\

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using TMPro;
 
 namespace V1
@@ -13,6 +12,9 @@ namespace V1
         public bool m_debugMode;
 
         [SerializeField]
+        private GameObject m_orbPrefab;
+
+        [SerializeField]
         private float m_startCurrency = 0.0f;
         [SerializeField]
         private bool m_updateCurrency;
@@ -23,6 +25,8 @@ namespace V1
         private float m_currency = 0;
 
         private UpdateCurrencyEvent m_currencyEvent;
+
+        private SpawnOrbEvent m_spawnOrbEvent;
         
         private void Awake() 
         {
@@ -84,7 +88,11 @@ namespace V1
             if(m_currencyEvent == null)
                 m_currencyEvent = new UpdateCurrencyEvent();
 
+            if(m_spawnOrbEvent == null)
+                m_spawnOrbEvent = new SpawnOrbEvent();
+
             m_currencyEvent.AddListener(UpdateCurrency);
+            m_spawnOrbEvent.AddListener(SpawnOrb);
         }
 
         private void UpdateCurrency(float val)
@@ -100,6 +108,13 @@ namespace V1
             }
         }
 
+        private void SpawnOrb(EnemyOrbData p_orbEnemyData)
+        {
+            GameObject orb = Instantiate(m_orbPrefab, p_orbEnemyData.SpawnPosition, Quaternion.identity);
+            OrbController oc = orb.GetComponent<OrbController>();
+            oc.OrbData = new OrbSpawnData(p_orbEnemyData);
+        }
+
 
         public float GravityScale
         {
@@ -112,8 +127,11 @@ namespace V1
             get { return m_currencyEvent; }
             set { m_currencyEvent = value; }
         }
-        
-    }
 
-    public class UpdateCurrencyEvent : UnityEvent<float> {}
+        public SpawnOrbEvent OrbEvent
+        {
+            get { return m_spawnOrbEvent; }
+            set {  m_spawnOrbEvent = value; }
+        }
+    }
 }

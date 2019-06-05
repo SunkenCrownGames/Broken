@@ -486,6 +486,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_enemyData.m_orbData.m_orbSeekSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_enemyData.m_orbData.m_orbType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a, type: 3}
 --- !u!1001 &2548591414829840513
@@ -558,7 +568,7 @@ PrefabInstance:
     - target: {fileID: 2548591415824548067, guid: 36dbc42e698791a4196cd755d135d1c0,
         type: 3}
       propertyPath: m_maxScale
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36dbc42e698791a4196cd755d135d1c0, type: 3}
@@ -647,8 +657,14 @@ PrefabInstance:
     - target: {fileID: 3420973698228193918, guid: fb74b26226a87f1429da73706953a039,
         type: 3}
       propertyPath: m_updateCurrency
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3420973698228193918, guid: fb74b26226a87f1429da73706953a039,
+        type: 3}
+      propertyPath: m_orbPrefab
+      value: 
+      objectReference: {fileID: 2548591415824548060, guid: 36dbc42e698791a4196cd755d135d1c0,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb74b26226a87f1429da73706953a039, type: 3}
 --- !u!1001 &5752022074840141440

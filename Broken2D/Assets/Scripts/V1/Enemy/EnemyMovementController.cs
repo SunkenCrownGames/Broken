@@ -137,5 +137,11 @@ namespace V1
         {
             transform.position += new Vector3(m_enemyData.MovementSpeed * m_enemyData.Direction * Time.deltaTime, m_enemyData.VerticalSpeed  * Time.deltaTime);
         }
+
+        public EnemyData EnemyInfo
+        {
+            get { return m_enemyData; }
+            set { m_enemyData = value; }
+        }
     }
 }

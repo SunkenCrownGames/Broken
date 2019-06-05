@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2548591415824548065}
   - component: {fileID: 2548591415824548062}
   - component: {fileID: 2548591415824548063}
+  - component: {fileID: 8106174505551632604}
   - component: {fileID: 2548591415824548067}
   m_Layer: 0
   m_Name: Orb
@@ -121,6 +122,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_energyValue: 500
+--- !u!114 &8106174505551632604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548591415824548060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e948a4ade2f3c547aaeb43bec3ffdc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_orbType: 1
 --- !u!114 &2548591415824548067
 MonoBehaviour:
   m_ObjectHideFlags: 0

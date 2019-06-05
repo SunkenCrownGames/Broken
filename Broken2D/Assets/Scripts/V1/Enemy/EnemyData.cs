@@ -5,6 +5,7 @@ namespace V1
     [System.Serializable]
     public class EnemyData
     {
+        [Header("Enemy Combat")]
         [SerializeField]
         private EnemyType m_enemyType;
 
@@ -28,6 +29,10 @@ namespace V1
 
         [SerializeField]
         private float m_attackRange;
+        
+        [Header("Enemy Energy Value")]
+        [SerializeField]
+        private EnemyOrbData m_orbData;
 
         public float MovementSpeed
         {
@@ -76,6 +81,12 @@ namespace V1
         {
             get { return m_attackRange; }
             set { m_attackRange = value; }
+        }
+
+        public EnemyOrbData OrbData
+        {
+            get { return m_orbData; }
+            set { m_orbData = value; }
         }
 
 

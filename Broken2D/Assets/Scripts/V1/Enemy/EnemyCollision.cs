@@ -5,6 +5,9 @@ namespace V1
     public class EnemyCollision : MonoBehaviour
     {
         private EnemyHealth m_health;
+        private EnemyMovementController m_emv;
+
+        private static GameManager m_gm;
 
         private void Awake() 
         {
@@ -20,6 +23,8 @@ namespace V1
         {
             if(m_health.m_health <= 0)
             {
+                m_emv.EnemyInfo.OrbData.SpawnPosition = transform.position;
+                m_gm.OrbEvent.Invoke(m_emv.EnemyInfo.OrbData);
                 Destroy(this.gameObject);
             }
         }
@@ -28,6 +33,10 @@ namespace V1
         private void BindObjects()
         {
             m_health = GetComponent<EnemyHealth>();
+            m_emv = GetComponent<EnemyMovementController>();
+
+            if(m_gm == null)
+                m_gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
 
         private void BulletCollision(Collider2D p_other)
