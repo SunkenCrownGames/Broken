@@ -19,7 +19,7 @@
 * Enemy Hit Loses Health
 * Enemy Drop Energy On Death
 * Energy Dropped get sucked by the Player
-* Energy Straigh Tracking From Player To Enemy~
+* Energy Straigh Tracking From Player To Enemy
 
 ## Version 5 Features To Implement
 ~~Energy Straigh Tracking From Player To Enemy~~\
