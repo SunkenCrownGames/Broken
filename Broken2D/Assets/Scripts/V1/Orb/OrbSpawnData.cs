@@ -15,7 +15,7 @@ namespace V1
         [SerializeField]
         private TrackType m_orbTrackType;
 
-        public OrbSpawnData(OrbType p_orbType = OrbType.STATIONARY, float p_orbSeekSpeed = 0, TrackType p_trackType = TrackType.NONE)
+        public OrbSpawnData(OrbType p_orbType, float p_orbSeekSpeed = 0, TrackType p_trackType = TrackType.NONE)
         {
             m_orbType = p_orbType;
             m_orbSeekSpeed = p_orbSeekSpeed;

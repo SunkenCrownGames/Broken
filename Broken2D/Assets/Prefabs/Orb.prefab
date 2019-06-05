@@ -134,7 +134,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e948a4ade2f3c547aaeb43bec3ffdc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_orbType: 1
+  m_orbData:
+    m_orbType: 0
+    m_orbSeekSpeed: 0
+    m_orbTrackType: 0
+  m_currentDuration: 0
+  m_duration: 2
 --- !u!114 &2548591415824548067
 MonoBehaviour:
   m_ObjectHideFlags: 0

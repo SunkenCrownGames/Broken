@@ -16,8 +16,15 @@ namespace V1
 
         private void OnTriggerEnter2D(Collider2D p_other)
         {
-            BulletCollision(p_other);
+            BulletTriggerCollision(p_other);
         }
+
+        private void OnCollisionEnter2D(Collision2D p_other) 
+        {
+            PlayerCollision(p_other);
+        }
+
+
 
         private void Update()
         {
@@ -39,12 +46,24 @@ namespace V1
                 m_gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
 
-        private void BulletCollision(Collider2D p_other)
+        private void BulletTriggerCollision(Collider2D p_other)
         {
             if(p_other.CompareTag("Bullet"))
             {
                 m_health.m_health -= p_other.gameObject.GetComponent<ProjectileController>().BulletData.BulletDamage;
                 Destroy(p_other.gameObject);
+            }
+        }
+        
+        private void PlayerCollision(Collision2D p_other)
+        {
+            if(m_emv.EnemyInfo.EnemyType == EnemyType.SEEK)
+            {
+                if(p_other.gameObject.CompareTag("Player"))
+                {
+                    Debug.Log("Reduce Health");
+                    Destroy(this.gameObject);
+                }
             }
         }
     }

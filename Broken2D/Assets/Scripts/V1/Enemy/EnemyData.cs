@@ -29,6 +29,15 @@ namespace V1
 
         [SerializeField]
         private float m_attackRange;
+
+        [Header("Enemy Seek Data")]
+        [SerializeField]
+        private float m_frequency;
+        [SerializeField]
+        private float m_magnitude;
+        
+        private float m_elapsedTime;
+
         
         [Header("Enemy Energy Value")]
         [SerializeField]
@@ -64,7 +73,7 @@ namespace V1
             set { m_maxFallSpeed = value; }
         }
 
-        public EnemyType EnemyInfo
+        public EnemyType EnemyType
         {
             get { return m_enemyType; }
             set { m_enemyType = value; }
@@ -89,6 +98,22 @@ namespace V1
             set { m_orbData = value; }
         }
 
+        public float ElapsedTime
+        {
+            get { return m_elapsedTime; }
+            set { m_elapsedTime = value; }
+        }
 
+        public float Frequency
+        {
+            get { return m_frequency; }
+            set { m_frequency = value; }
+        }
+
+        public float Magnitude
+        {
+            get { return m_magnitude; }
+            set { m_magnitude = value; }
+        }
     }
 }

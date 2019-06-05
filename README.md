@@ -20,15 +20,27 @@
 * Enemy Drop Energy On Death
 * Energy Dropped get sucked by the Player
 * Energy Straigh Tracking From Player To Enemy
+* Energy Bezier Curve Tracking From Player To Enemy
+* Seeking Enemy -> Goes Towards Player And Suicides
+* Increase Speed Modifiers For Seekers Added Horizontal And Vertical
+* Seeking Enemies Drop Orbs On Death
+* Bezier Curve Movement Added To Seeker Drones
+* Sin Wave Added To Straight Seekers
 
-## Version 5 Features To Implement
-~~Energy Straigh Tracking From Player To Enemy~~\
-Bezier Curve Tracking From Player To Enemy\
-Seeking Enemy -> Goes Towards Player And Suicides\
+## Version 6 Features To Implement
 ScreenShake On Enemy Hit (Small)\
 ScreenShake On Enemy Death (Major)\
 ScreenShake On Player Hit (Small)\
-ScreenShake On Player Death (Major)\
+ScreenShake On Player Death (Major)
+
+## Version 5 Features To Implement
+~~Energy Straigh Tracking From Player To Enemy~~\
+~~Bezier Curve Tracking From Player To Enemy~~\
+~~Seeking Enemy -> Goes Towards Player And Suicides~~\
+~~Increase Speed Modifiers For Seekers Added Horizontal And Vertical~~
+~~Seeking Enemies Drop Orbs On Death~~\
+~~Bezier Curve Movement Added To Seeker Drones~~\
+~~Sin Wave Added To Straight Seekers~~
 
 ## Version 4 Features To Implement
 ~~Enemy Skeleton~~\

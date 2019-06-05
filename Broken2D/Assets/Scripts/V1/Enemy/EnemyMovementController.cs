@@ -10,7 +10,10 @@ namespace V1
         private EnemyData m_enemyData = null;
 
         [SerializeField]
-        private PatrolData m_patrolData = null;
+        private EnemyPatrolData m_patrolData = null;
+
+        [SerializeField]
+        private EnemySeekData m_seekData;
 
 
         private int m_playerLayer = 0;
@@ -19,28 +22,35 @@ namespace V1
 
         [SerializeField]
         private static GameObject m_player;
-        
-        
-        private void Awake() 
+
+
+        private void Awake()
         {
             BindObjects();
+
+            if(m_enemyData.EnemyType == EnemyType.SEEK)
+                InitializeSeek();
         }
 
         private void Update()
         {
-            UpdateVelocity();
-
-            if(m_entity.Ground != null)
+            if (m_enemyData.EnemyType == EnemyType.PATROL)
             {
-                if(m_enemyData.EnemyInfo == EnemyType.PATROL)
+                UpdateVelocity();
+
+                if (m_entity.Ground != null)
                 {
-                    if(m_patrolData.CurrentStatus != PatrolStatus.CHASING)
+                    if (m_patrolData.CurrentStatus != PatrolStatus.CHASING)
                         Patrol();
                     else
                         Chase();
 
                     Detect();
                 }
+            }
+            else
+            {
+                Seek();
             }
 
             Move();
@@ -54,38 +64,39 @@ namespace V1
             m_player = GameObject.FindGameObjectWithTag("Player");
         }
 
+        #region Patrol
         private void UpdateVelocity()
         {
             //Update Vertical Velocity If Falling
-            if(m_entity.MovementState == EntityMovementState.FALLING)
+            if (m_entity.MovementState == EntityMovementState.FALLING)
             {
                 //Debug.Log(m_playerData.VerticalSpeed);
-                if(m_enemyData.VerticalSpeed > -m_enemyData.MaxFallSpeed)
+                if (m_enemyData.VerticalSpeed > -m_enemyData.MaxFallSpeed)
                     m_enemyData.VerticalSpeed -= m_entity.GameManagerRef.GravityScale * Time.deltaTime;
             }
-            else if(m_entity.MovementState != EntityMovementState.JUMPING)
+            else if (m_entity.MovementState != EntityMovementState.JUMPING)
             {
-                m_enemyData.VerticalSpeed  = 0.0f;
+                m_enemyData.VerticalSpeed = 0.0f;
             }
 
             //Update Velocity Direction in entity depending on the speed
-            if(m_enemyData.VerticalSpeed > 0)
+            if (m_enemyData.VerticalSpeed > 0)
                 m_entity.VerticalDirection = EntityVerticalDirection.RISING;
-            else if(m_enemyData.VerticalSpeed < 0)
+            else if (m_enemyData.VerticalSpeed < 0)
                 m_entity.VerticalDirection = EntityVerticalDirection.FALLING;
             else
                 m_entity.VerticalDirection = EntityVerticalDirection.NONE;
 
         }
-        
+
         private void Patrol()
         {
-            float distance = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? Mathf.Abs(m_entity.Ground.GetComponent<Bounds>().EntityHorizontalBounds[1] - m_bounds.EntityHorizontalBounds[1]) : Mathf.Abs(m_entity.Ground.GetComponent<Bounds>().EntityHorizontalBounds[0] - m_bounds.EntityHorizontalBounds[0]); 
+            float distance = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? Mathf.Abs(m_entity.Ground.GetComponent<Bounds>().EntityHorizontalBounds[1] - m_bounds.EntityHorizontalBounds[1]) : Mathf.Abs(m_entity.Ground.GetComponent<Bounds>().EntityHorizontalBounds[0] - m_bounds.EntityHorizontalBounds[0]);
             m_enemyData.Direction = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? 1.0f : -1.0f;
             //Control Direction
-            if(distance < m_patrolData.LedgeDistance)
+            if (distance < m_patrolData.LedgeDistance)
             {
-                if(m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT)
+                if (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT)
                 {
                     m_entity.HorizontalDirection = EntityHorizontalDirection.LEFT;
                 }
@@ -104,7 +115,7 @@ namespace V1
 
             GameObject m_playerGround = m_player.GetComponent<Entity>().Ground;
 
-            if(distance > m_enemyData.AttackRange)
+            if (distance > m_enemyData.AttackRange)
             {
                 m_entity.HorizontalDirection = (xCurrentPos < xPlayerPos) ? EntityHorizontalDirection.RIGHT : EntityHorizontalDirection.LEFT;
                 m_enemyData.Direction = (xCurrentPos < xPlayerPos) ? 1 : -1;
@@ -114,7 +125,7 @@ namespace V1
                 m_enemyData.Direction = 0;
             }
 
-            if(m_entity.Ground == m_playerGround && m_playerGround != null)
+            if (m_entity.Ground == m_playerGround && m_playerGround != null)
             {
                 m_patrolData.CurrentStatus = PatrolStatus.PATROLLING;
             }
@@ -122,8 +133,8 @@ namespace V1
 
         private void Detect()
         {
-            Debug.DrawLine(transform.position, transform.position + new Vector3(m_enemyData.DetectionRange, 0 ,0), Color.red);
-            RaycastHit2D hit = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? 
+            Debug.DrawLine(transform.position, transform.position + new Vector3(m_enemyData.DetectionRange, 0, 0), Color.red);
+            RaycastHit2D hit = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ?
             Physics2D.Raycast(transform.position, Vector2.right, m_enemyData.DetectionRange, m_playerLayer) :
             Physics2D.Raycast(transform.position, -Vector2.right, m_enemyData.DetectionRange, m_playerLayer);
             if (hit.collider != null)
@@ -133,15 +144,74 @@ namespace V1
             }
         }
 
+
         private void Move()
         {
-            transform.position += new Vector3(m_enemyData.MovementSpeed * m_enemyData.Direction * Time.deltaTime, m_enemyData.VerticalSpeed  * Time.deltaTime);
+            transform.position += new Vector3(m_enemyData.MovementSpeed * m_enemyData.Direction * Time.deltaTime, m_enemyData.VerticalSpeed * Time.deltaTime);
         }
+        #endregion
+
+
+        private void InitializeSeek()
+        {
+            if(m_seekData.SeekType == EnemySeekMovementType.BEZIER)
+                InitializeBezierSeek();
+        }
+
+        private void InitializeBezierSeek()
+        {
+            m_seekData.StartPos = transform.position;
+            //m_midPoint = (m_player.transform.position + m_startPos) / 2;
+            m_seekData.MidPoint = (new Vector3(m_player.transform.position.x, 0, 0) + m_seekData.StartPos) / 2;
+        }
+
+        private void Seek()
+        {
+            Vector3 direction = m_player.transform.position - transform.position;
+
+            switch(m_seekData.SeekType)
+            {
+                case EnemySeekMovementType.STRAIGHT:
+                    StraightMovement();
+                break;
+                case EnemySeekMovementType.BEZIER:
+                    BezierMovement();
+                break;
+            }
+
+            transform.position += transform.up * Mathf.Sin(Time.time * m_enemyData.Frequency) * m_enemyData.Magnitude;
+        }
+        private void StraightMovement()
+        {
+            float deltaSpeed = m_enemyData.MovementSpeed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, m_player.transform.position, deltaSpeed);
+            Vector3 direction  = m_player.transform.position - transform.position;
+            //Increase the Vertical Speed 
+            transform.position += new Vector3(direction.x * m_seekData.HorizontalSpeed * Time.deltaTime, direction.y * m_seekData.VerticalSpeed * Time.deltaTime, 0);
+        }
+
+        private void BezierMovement()
+        {
+            m_seekData.CurrentDuration += Time.deltaTime;
+            m_seekData.MidPoint = (m_player.transform.position + m_seekData.StartPos) / 2;
+            //m_midPoint = (new Vector3(m_player.transform.position.x, 0, 0) + m_startPos) / 2;
+            transform.position = BezierCurve.CalculateBezierPoint(m_seekData.CurrentDuration / m_seekData.Duration, m_seekData.StartPos, m_seekData.MidPoint, m_player.transform.position);
+        }
+
+        
+
+
 
         public EnemyData EnemyInfo
         {
             get { return m_enemyData; }
             set { m_enemyData = value; }
         }
+    }
+
+    public enum EnemySeekMovementType
+    {
+        STRAIGHT,
+        BEZIER
     }
 }

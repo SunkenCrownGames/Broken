@@ -12,7 +12,7 @@ namespace V1
         public bool m_debugMode;
 
         [SerializeField]
-        private GameObject m_orbPrefab;
+        private GameObject m_orbPrefab = null;
 
         [SerializeField]
         private float m_startCurrency = 0.0f;
