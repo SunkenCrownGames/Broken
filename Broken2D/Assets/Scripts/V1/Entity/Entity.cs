@@ -26,6 +26,7 @@ namespace V1
         //The ground we are currently on
         private GameObject m_ground;
 
+        private static GameObject m_playerRef;
 
         private void Awake() 
         {
@@ -153,6 +154,12 @@ namespace V1
                         m_horizontalDirection = value; 
                     }
                 }
+        }
+
+        public GameObject PlayerRef
+        {
+            get { return m_playerRef; }
+            set { m_playerRef = value; }
         }
     }
 }

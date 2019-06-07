@@ -40,6 +40,7 @@ namespace V1
         private void BindObjects()
         {
             m_entity = GetComponent<Entity>();
+            m_entity.PlayerRef = this.gameObject;
         }
 
         private void UpdateInput()

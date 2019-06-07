@@ -4,10 +4,16 @@ namespace V1
     
     public class EnemyCollision : MonoBehaviour
     {
+        [SerializeField]
+        private ScreenShakeData m_screenShakeHitData;
+        [SerializeField]
+        private ScreenShakeData m_screenShakeDeathData;
+
         private EnemyHealth m_health;
-        private EnemyMovementController m_emv;
+        private EnemyController m_emv;
 
         private static GameManager m_gm;
+        private static ScreenShakeManager m_ssm;
 
         private void Awake() 
         {
@@ -40,10 +46,13 @@ namespace V1
         private void BindObjects()
         {
             m_health = GetComponent<EnemyHealth>();
-            m_emv = GetComponent<EnemyMovementController>();
+            m_emv = GetComponent<EnemyController>();
 
+            GameObject gameManagerObj = GameObject.FindGameObjectWithTag("GameManager");
             if(m_gm == null)
-                m_gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+                m_gm = gameManagerObj.GetComponent<GameManager>();
+            if (m_ssm == null)
+                m_ssm = gameManagerObj.GetComponent<ScreenShakeManager>();;
         }
 
         private void BulletTriggerCollision(Collider2D p_other)
@@ -51,6 +60,7 @@ namespace V1
             if(p_other.CompareTag("Bullet"))
             {
                 m_health.m_health -= p_other.gameObject.GetComponent<ProjectileController>().BulletData.BulletDamage;
+                m_ssm.ShakeEvent.Invoke(m_screenShakeHitData);
                 Destroy(p_other.gameObject);
             }
         }

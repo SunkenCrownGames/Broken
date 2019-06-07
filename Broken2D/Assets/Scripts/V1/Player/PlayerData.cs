@@ -47,6 +47,12 @@ namespace V1
         [SerializeField]
         private DashData m_dashData;
 
+        [SerializeField]
+        private ScreenShakeData m_screenShakeHitData;
+
+        [SerializeField]
+        private ScreenShakeData m_screenShakeDeathData;
+
 
 
         public float MovementSpeed
@@ -132,6 +138,18 @@ namespace V1
         {
             get { return m_dashData; }
             set { m_dashData = value; }
+        }
+
+        public ScreenShakeData ShakeHitData
+        {
+            get { return m_screenShakeHitData; }
+            set { m_screenShakeHitData = value; }
+        }
+
+        public ScreenShakeData ShakeDeathData
+        {
+            get { return m_screenShakeDeathData; }
+            set { m_screenShakeDeathData = value; }
         }
     }
 }

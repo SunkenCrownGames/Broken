@@ -30,12 +30,16 @@
 * Add Random Speed Modifiers from a range to give
 * Added Random Toggle
 * Add Sin Wave Toggle
+* ScreenShake On Enemy Hit (Small)
+* ScreenShake On Enemy Death (Major)
+* ScreenShake On Player Hit (Small)
+* ScreenShake On Player Death (Major)
 
 ## Version 6 Features To Implement
-ScreenShake On Enemy Hit (Small)\
-ScreenShake On Enemy Death (Major)\
-ScreenShake On Player Hit (Small)\
-ScreenShake On Player Death (Major)
+~~ScreenShake On Enemy Hit (Small)~~\
+~~ScreenShake On Enemy Death (Major)~~\
+~~ScreenShake On Player Hit (Small)~~\
+~~ScreenShake On Player Death (Major)~~
 
 ## Version 5 Features To Implement
 ~~Energy Straigh Tracking From Player To Enemy~~\
