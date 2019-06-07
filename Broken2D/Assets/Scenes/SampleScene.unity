@@ -360,6 +360,36 @@ PrefabInstance:
       propertyPath: m_seekData.m_verticalSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_horizontalSpeedRange.m_maxRange
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_maxRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_minRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_minRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_maxRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_randomizedDataStatus
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a, type: 3}
 --- !u!1 &517182433 stripped
@@ -551,6 +581,36 @@ PrefabInstance:
       propertyPath: m_seekData.m_verticalSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_horizontalSpeedRange.m_maxRange
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_maxRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_minRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_minRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_maxRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_randomizedDataStatus
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a, type: 3}
 --- !u!1001 &1378971360
@@ -669,6 +729,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_seekData.m_verticalSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_horizontalSpeedRange.m_maxRange
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_maxRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_minRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_minRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_maxRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_randomizedDataStatus
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a, type: 3}
@@ -818,6 +908,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_seekData.m_verticalSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_horizontalSpeedRange.m_maxRange
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_maxRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_minRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_minRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_maxRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_randomizedDataStatus
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a, type: 3}
@@ -1034,6 +1154,36 @@ PrefabInstance:
       propertyPath: m_seekData.m_verticalSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_horizontalSpeedRange.m_maxRange
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_maxRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_VerticalSpeedRange.m_minRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_minRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_seekRandomizerData.m_SinWaveRange.m_maxRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176935699298871351, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a,
+        type: 3}
+      propertyPath: m_seekData.m_randomizedDataStatus
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0f7d14b2a7d2148b8bd70235dbce3a, type: 3}
 --- !u!1 &1790566950 stripped
@@ -1181,6 +1331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CameraDistance
       value: 3.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1093108820909466827, guid: 8b16f39ebc246ac4e97fa101cc2902b3,
+        type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b16f39ebc246ac4e97fa101cc2902b3, type: 3}

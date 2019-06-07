@@ -26,6 +26,10 @@
 * Seeking Enemies Drop Orbs On Death
 * Bezier Curve Movement Added To Seeker Drones
 * Sin Wave Added To Straight Seekers
+* Add Randomized value to sin wave to make it look more natural
+* Add Random Speed Modifiers from a range to give
+* Added Random Toggle
+* Add Sin Wave Toggle
 
 ## Version 6 Features To Implement
 ScreenShake On Enemy Hit (Small)\
@@ -41,9 +45,10 @@ ScreenShake On Player Death (Major)
 ~~Seeking Enemies Drop Orbs On Death~~\
 ~~Bezier Curve Movement Added To Seeker Drones~~\
 ~~Sin Wave Added To Straight Seekers~~
-Add Randomized value to sin wave to make it look more natural
-Add Random Speed Modifiers from a range to give 
-Add Sin Wave Toggle
+~~Add Randomized value to sin wave to make it look more natural~~
+~~Add Random Speed Modifiers from a range to give~~
+~~Added Random Toggle~~
+~~Add Sin Wave Toggle~~
 
 ## Version 4 Features To Implement
 ~~Enemy Skeleton~~\

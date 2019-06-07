@@ -25,6 +25,17 @@ namespace V1
         [SerializeField]
         private float m_duration = 3;
 
+
+        [SerializeField]
+        private bool m_sinWaveToggle;
+
+        [SerializeField]
+        private bool m_randomizedDataStatus;
+
+        [SerializeField]
+        private SeekRandomizerData m_seekRandomizerData;
+
+
         public Vector3 StartPos
         {
             get { return m_startPos; }
@@ -72,6 +83,24 @@ namespace V1
         {
             get { return m_verticalSpeed; }
             set { m_verticalSpeed = value; }
+        }
+
+        public SeekRandomizerData RandomizerData
+        {
+            get { return m_seekRandomizerData; }
+            set { m_seekRandomizerData = value; }
+        }
+
+        public bool RandomizedStatus
+        {
+            get { return m_randomizedDataStatus; }
+            set { m_randomizedDataStatus = value; }
+        }
+
+        public bool SinWaveToggle
+        {
+            get { return m_sinWaveToggle; }
+            set { m_sinWaveToggle = value; }
         }
     }
 }

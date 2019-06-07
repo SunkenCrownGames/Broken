@@ -62,6 +62,7 @@ namespace V1
             m_bounds = GetComponent<Bounds>();
             m_playerLayer = LayerMask.GetMask("PLAYER");
             m_player = GameObject.FindGameObjectWithTag("Player");
+            m_seekData.RandomizerData.GenerateRandomizedData();
         }
 
         #region Patrol
@@ -179,7 +180,14 @@ namespace V1
                 break;
             }
 
-            transform.position += transform.up * Mathf.Sin(Time.time * m_enemyData.Frequency) * m_enemyData.Magnitude;
+
+            if(m_seekData.SinWaveToggle)
+            {
+                if(m_seekData.RandomizedStatus)
+                    transform.position += transform.up * Mathf.Sin(Time.time * m_seekData.RandomizerData.SinWaveSpeedRandomized) * m_enemyData.Magnitude;
+                else
+                    transform.position += transform.up * Mathf.Sin(Time.time * m_enemyData.Frequency) * m_enemyData.Magnitude;
+            }
         }
         private void StraightMovement()
         {
@@ -187,7 +195,11 @@ namespace V1
             transform.position = Vector2.MoveTowards(transform.position, m_player.transform.position, deltaSpeed);
             Vector3 direction  = m_player.transform.position - transform.position;
             //Increase the Vertical Speed 
-            transform.position += new Vector3(direction.x * m_seekData.HorizontalSpeed * Time.deltaTime, direction.y * m_seekData.VerticalSpeed * Time.deltaTime, 0);
+
+            if(m_seekData.RandomizedStatus)
+                transform.position += new Vector3(direction.x * m_seekData.RandomizerData.HorinzontalSpeedRandomized * Time.deltaTime, direction.y * m_seekData.RandomizerData.VerticalSpeedRandomized * Time.deltaTime, 0);
+            else
+                transform.position += new Vector3(direction.x * m_seekData.HorizontalSpeed * Time.deltaTime, direction.y * m_seekData.VerticalSpeed * Time.deltaTime, 0);
         }
 
         private void BezierMovement()
