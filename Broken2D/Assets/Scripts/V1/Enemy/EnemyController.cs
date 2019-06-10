@@ -28,7 +28,7 @@ namespace V1
         {
             BindObjects();
 
-            if(m_enemyData.EnemyType == EnemyType.SEEK)
+            if (m_enemyData.EnemyType == EnemyType.SEEK)
                 InitializeSeek();
         }
 
@@ -54,7 +54,7 @@ namespace V1
             }
             else
             {
-                if(m_entity.PlayerRef != null)
+                if (m_entity.PlayerRef != null)
                     Seek();
             }
 
@@ -93,14 +93,32 @@ namespace V1
             else
                 m_entity.VerticalDirection = EntityVerticalDirection.NONE;
 
+            
+            if(m_entity.ActionState != EntityActionState.HIT)
+            {
+                if(m_enemyData.MovementSpeed >= m_enemyData.MaxMovementSpeed)
+                {
+                    m_enemyData.MovementSpeed -= m_enemyData.HorizontalAccelerationSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    m_enemyData.MovementSpeed += m_enemyData.HorizontalAccelerationSpeed * Time.deltaTime;
+                }
+            }
+
+        }
+
+        public void StartKnockBack()
+        {
+            m_enemyData.MovementSpeed = m_entity.KnockBackData.HorizontalKnockBackStrength;
         }
 
         private void Patrol()
         {
             float distance = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? Mathf.Abs(m_entity.Ground.GetComponent<Bounds>().EntityHorizontalBounds[1] - m_bounds.EntityHorizontalBounds[1]) : Mathf.Abs(m_entity.Ground.GetComponent<Bounds>().EntityHorizontalBounds[0] - m_bounds.EntityHorizontalBounds[0]);
             m_enemyData.Direction = (m_entity.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? 1.0f : -1.0f;
-            
-            
+
+
             //Control Direction
             if (distance < m_patrolData.LedgeDistance)
             {
@@ -160,6 +178,12 @@ namespace V1
 
         private void Move()
         {
+            if(m_entity.ActionState == EntityActionState.HIT)
+            {
+                float dir = (m_entity.KnockBackData.HorizontalDirection == EntityHorizontalDirection.RIGHT) ? -1 : 1;
+                transform.position += new Vector3(m_enemyData.MovementSpeed * dir * Time.deltaTime, 0);
+            }
+            else
                 transform.position += new Vector3(m_enemyData.MovementSpeed * m_enemyData.Direction * Time.deltaTime, m_enemyData.VerticalSpeed * Time.deltaTime);
         }
         #endregion
@@ -167,7 +191,7 @@ namespace V1
 
         private void InitializeSeek()
         {
-            if(m_seekData.SeekType == EnemySeekMovementType.BEZIER)
+            if (m_seekData.SeekType == EnemySeekMovementType.BEZIER)
                 InitializeBezierSeek();
         }
 
@@ -182,21 +206,21 @@ namespace V1
         {
             Vector3 direction = m_player.transform.position - transform.position;
 
-            switch(m_seekData.SeekType)
+            switch (m_seekData.SeekType)
             {
                 case EnemySeekMovementType.STRAIGHT:
                     StraightMovement();
-                break;
+                    break;
                 case EnemySeekMovementType.BEZIER:
                     BezierMovement();
-                break;
+                    break;
             }
 
 
-            if(m_seekData.TrigWaveToggle)
+            if (m_seekData.TrigWaveToggle)
             {
                 float val = (m_seekData.Type == WaveType.SIN) ? Mathf.Sin(Time.time * m_seekData.RandomizerData.SinWaveSpeedRandomized) : Mathf.Cos(Time.time * m_seekData.RandomizerData.SinWaveSpeedRandomized);
-                if(m_seekData.RandomizedStatus)
+                if (m_seekData.RandomizedStatus)
                     transform.position += transform.up * val * m_enemyData.Magnitude;
                 else
                     transform.position += transform.up * val * m_enemyData.Magnitude;
@@ -207,11 +231,11 @@ namespace V1
             float deltaSpeed = m_enemyData.MovementSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, m_player.transform.position, deltaSpeed);
 
-            Vector3 heading =  m_player.transform.position - transform.position;;
+            Vector3 heading = m_player.transform.position - transform.position; ;
             Vector3 direction = heading / heading.magnitude;
             //Increase the Vertical Speed 
 
-            if(m_seekData.RandomizedStatus)
+            if (m_seekData.RandomizedStatus)
                 transform.position += new Vector3(direction.x * m_seekData.RandomizerData.HorinzontalSpeedRandomized * Time.deltaTime, direction.y * m_seekData.RandomizerData.VerticalSpeedRandomized * Time.deltaTime, 0);
             else
                 transform.position += new Vector3(direction.x * m_seekData.HorizontalSpeed * Time.deltaTime, direction.y * m_seekData.VerticalSpeed * Time.deltaTime, 0);
@@ -225,7 +249,7 @@ namespace V1
             transform.position = BezierCurve.CalculateBezierPoint(m_seekData.CurrentDuration / m_seekData.Duration, m_seekData.StartPos, m_seekData.MidPoint, m_player.transform.position);
         }
 
-        
+
 
 
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace V1
 {
@@ -16,6 +17,7 @@ namespace V1
 
         [SerializeField]
         private float m_startCurrency = 0.0f;
+
         [SerializeField]
         private bool m_updateCurrency;
         [SerializeField]
@@ -52,7 +54,10 @@ namespace V1
             if (Application.IsPlaying(gameObject))
             {
                 if(m_debugMode)
+                {
                     m_currencyValDebug.text = m_currency.ToString();
+                    ResetLevel();
+                }
             }
             //IN EDITOR
             else
@@ -84,6 +89,12 @@ namespace V1
                 Debug.Log("Start Currency Updated");
                 m_updateCurrency = false;
             }
+        }
+
+        private void ResetLevel()
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+                  SceneManager.LoadScene(0);
         }
 
         private void BindEvents()

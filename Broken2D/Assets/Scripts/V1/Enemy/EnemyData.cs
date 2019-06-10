@@ -5,7 +5,6 @@ namespace V1
     [System.Serializable]
     public class EnemyData
     {
-        [Header("Enemy Combat")]
         [SerializeField]
         private EnemyType m_enemyType;
 
@@ -13,10 +12,24 @@ namespace V1
         private float m_movementSpeed;
 
         [SerializeField]
+        private float m_horizontalAccelerationSpeed;
+        
+
+        [SerializeField]
         private float m_maxMovementSpeed;
+
+
 
         [SerializeField]
         private float m_verticalSpeed;
+
+
+        [SerializeField]
+        private float m_verticalAccelerationSpeed;
+
+        [SerializeField]
+        private float m_maxVerticalSpeed;
+
 
         [SerializeField]
         private float m_horizontalDirection = 1;
@@ -107,6 +120,18 @@ namespace V1
         {
             get { return m_magnitude; }
             set { m_magnitude = value; }
+        }
+
+        public float HorizontalAccelerationSpeed
+        {
+            get { return m_horizontalAccelerationSpeed; }
+            set { m_horizontalAccelerationSpeed = value; }
+        }
+
+        public float VerticalAccelerationSpeed
+        {
+            get { return m_verticalAccelerationSpeed; }
+            set { m_verticalAccelerationSpeed = value; }
         }
     }
 }

@@ -17,8 +17,10 @@ namespace V1
         private EntityHorizontalDirection m_horizontalDirection = EntityHorizontalDirection.RIGHT;
 
         [SerializeField]
-
         private float m_groundedDistance = 0;
+
+        [SerializeField]
+        private EntityKnockBackData m_knockBackData;
 
         private Bounds m_bounds;
         private int m_groundLayerMask;
@@ -37,6 +39,7 @@ namespace V1
         private void Update()
         {
             CheckGrounded();
+            UpdateHitState();
             UpdateMovementState();
         }
         
@@ -87,6 +90,20 @@ namespace V1
             }
         }
 
+        private void UpdateHitState()
+        {
+            if(m_actionState == EntityActionState.HIT)
+            {
+                if(m_knockBackData.CurrentDuration < m_knockBackData.Duration)
+                    m_knockBackData.CurrentDuration += Time.deltaTime;
+                else
+                {
+                    m_knockBackData.Reset();
+                    m_actionState = EntityActionState.NONE;
+                }
+            }
+        }
+
         private void UpdateMovementState()
         {
                 //If we are not grounded
@@ -121,7 +138,6 @@ namespace V1
                     if(m_actionState != value)
                     {
                         m_actionState = value; 
-                        //Fire Change Animation
                     }
                 }
         }
@@ -163,6 +179,12 @@ namespace V1
         {
             get { return m_playerRef; }
             set { m_playerRef = value; }
+        }
+
+        public EntityKnockBackData KnockBackData
+        {
+            get { return m_knockBackData; }
+            set { m_knockBackData = value; }
         }
     }
 }

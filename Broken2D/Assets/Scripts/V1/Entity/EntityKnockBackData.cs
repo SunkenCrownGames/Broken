@@ -20,6 +20,9 @@ namespace V1
         [SerializeField]
         private bool m_knockBackActive;
 
+        [SerializeField]
+        private EntityHorizontalDirection m_hitDirection;
+
         public void Reset()
         {
             m_knockBackActive = false;
@@ -55,6 +58,12 @@ namespace V1
         {
             get { return m_knockBackActive; }
             set { m_knockBackActive = value; }
+        }
+        
+        public EntityHorizontalDirection HorizontalDirection
+        {
+            get { return m_hitDirection; }
+            set { m_hitDirection = value; }
         }
 
     }

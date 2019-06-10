@@ -67,6 +67,19 @@ namespace V1
                 m_health.m_health -= p_other.gameObject.GetComponent<ProjectileController>().BulletData.BulletDamage;
                 m_ssm.ShakeEvent.Invoke(m_screenShakeHitData);
                 m_entity.ActionState = EntityActionState.HIT;
+
+                if(p_other.gameObject.transform.position.x > transform.position.x)
+                {
+                    m_entity.KnockBackData.HorizontalDirection = EntityHorizontalDirection.RIGHT;
+                }
+                else
+                {
+                    m_entity.KnockBackData.HorizontalDirection = EntityHorizontalDirection.LEFT;
+                }
+
+                m_emv.StartKnockBack();
+                m_entity.KnockBackData.KnockBackActive = true;
+
                 Destroy(p_other.gameObject);
                 m_emv.PatrolData.CurrentStatus = PatrolStatus.CHASING;
             }
