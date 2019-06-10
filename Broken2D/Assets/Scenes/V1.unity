@@ -512,6 +512,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 263342794762678147, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_bullet
+      value: 
+      objectReference: {fileID: 7976573974256392932, guid: 280d4bb3e704d25489a03d850046ff85,
+        type: 3}
+    - target: {fileID: 152031417800510196, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_virtualCamera
+      value: 
+      objectReference: {fileID: 1552371477}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 088f7f1282352404eb9a606d66c5d57c, type: 3}
 --- !u!1001 &5780826988244361148
@@ -591,6 +602,12 @@ PrefabInstance:
       propertyPath: m_currencyValDebug
       value: 
       objectReference: {fileID: 1941058900}
+    - target: {fileID: 5780826990172634913, guid: 32711d1b96233c143a997013aca166d6,
+        type: 3}
+      propertyPath: m_orbPrefab
+      value: 
+      objectReference: {fileID: 8222199254861623481, guid: eee1dad0a2fc9304695bac31ff8748dc,
+        type: 3}
     - target: {fileID: 5780826990172634915, guid: 32711d1b96233c143a997013aca166d6,
         type: 3}
       propertyPath: m_virtualCamera
@@ -717,10 +734,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6793146629910999512}
   - component: {fileID: 6793146629910999516}
+  - component: {fileID: 6793146629910999517}
   - component: {fileID: 6793146629910999515}
   - component: {fileID: 6793146629910999518}
   - component: {fileID: 6793146629910999513}
   - component: {fileID: 6793146629910999519}
+  - component: {fileID: 6793146629910999520}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -746,7 +765,7 @@ MonoBehaviour:
     m_actionState: 0
     m_horizontalDirection: 1
     m_verticalDirection: 0
-    m_groundedDistance: 0.12
+    m_groundedDistance: 0.15
   m_enemyData:
     m_enemyType: 0
     m_movementData:
@@ -806,6 +825,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_updateEveryFrame: 1
+--- !u!114 &6793146629910999517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793146629910999514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b0c76980793164598fa06514393d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_screenShakeHitData:
+    m_type: 0
+    m_duration: 0
+    m_amplitude: 0
+    m_maxAmplitude: 0
+    m_frequency: 0
+    m_maxFrequency: 0
+  m_screenShakeDeathData:
+    m_type: 0
+    m_duration: 0
+    m_amplitude: 0
+    m_maxAmplitude: 0
+    m_frequency: 0
+    m_maxFrequency: 0
 --- !u!50 &6793146629910999518
 Rigidbody2D:
   serializedVersion: 4
@@ -875,6 +920,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6793146629910999520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793146629910999514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b920d4d31fd584c4a880ca8d89b97d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 500
 --- !u!1001 &7743698563190886928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -887,6 +945,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 7743698563920911621, guid: 85db448decce32042bcabcbe0a524260,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 1309760010}
     - target: {fileID: 7743698563830041035, guid: 85db448decce32042bcabcbe0a524260,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -942,11 +1005,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7743698563920911621, guid: 85db448decce32042bcabcbe0a524260,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 1309760010}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85db448decce32042bcabcbe0a524260, type: 3}
 --- !u!61 &8018850505304346088

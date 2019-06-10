@@ -40,6 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1504800717976335435}
   - component: {fileID: 1504800717976335439}
+  - component: {fileID: 152031417800510196}
+  - component: {fileID: 263342794762678147}
   - component: {fileID: 1504800717976335432}
   - component: {fileID: 1504800717976335437}
   - component: {fileID: 1504800717976335434}
@@ -79,6 +81,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_updateEveryFrame: 1
+--- !u!114 &152031417800510196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504800717976335433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe23d766f8d8144a861317b84919f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_virtualCamera: {fileID: 0}
+--- !u!114 &263342794762678147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504800717976335433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ecf048e0c45484d9c1ab200b5ef2cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bullet: {fileID: 0}
+  m_bulletSpawnObject: {fileID: 1504800717596502510}
+  m_shootingMode: 1
 --- !u!114 &1504800717976335432
 MonoBehaviour:
   m_ObjectHideFlags: 0

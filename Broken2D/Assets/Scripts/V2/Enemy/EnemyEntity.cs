@@ -231,5 +231,11 @@ namespace V2
         }
 
         #endregion
+
+        public EnemyData EnemyData
+        {
+            get { return m_enemyData; }
+            set { m_enemyData = value; }
+        }
     }
 }

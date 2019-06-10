@@ -4,7 +4,7 @@
 ## Implemented Features
 * Version 1 Fully Implemented
 
-## Version 2 Features To Implement
+## Version 1.1 Features To Implement
 KnockBack
 
 ## Version 1 Fully Features See Version1.Txt for all features implemented
