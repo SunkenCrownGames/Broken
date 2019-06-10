@@ -9,7 +9,7 @@ namespace V1
         private PlayerController m_pc;
 
         [SerializeField]
-        private CinemachineVirtualCamera m_virtualCamera;
+        private CinemachineVirtualCamera m_virtualCamera = null;
 
         private CinemachineBasicMultiChannelPerlin m_cinemachineMultiChannelPerlin;
 

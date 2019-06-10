@@ -6,7 +6,7 @@ namespace V1
     {
         private ScreenShakeEvent m_screenShakeEvent;
         [SerializeField]
-        private CinemachineVirtualCamera m_virtualCamera;
+        private CinemachineVirtualCamera m_virtualCamera = null;
 
 
         private CinemachineBasicMultiChannelPerlin m_cinemachinePerlinChannel;

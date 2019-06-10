@@ -8,7 +8,7 @@ TagManager:
   - Ground
   - CurrencyOrb
   - Enemy
-  - Bullet
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

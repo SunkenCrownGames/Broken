@@ -84,13 +84,6 @@ namespace V1
             get { return m_detectionRange; }
             set { m_detectionRange = value; }
         }
-        
-
-        public float AttackRange
-        {
-            get { return m_attackRange; }
-            set { m_attackRange = value; }
-        }
 
         public EnemyOrbData OrbData
         {

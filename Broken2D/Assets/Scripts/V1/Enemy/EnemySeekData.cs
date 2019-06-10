@@ -27,13 +27,16 @@ namespace V1
 
 
         [SerializeField]
-        private bool m_sinWaveToggle;
+        private bool m_trigWaveToggle;
 
         [SerializeField]
         private bool m_randomizedDataStatus;
 
         [SerializeField]
         private SeekRandomizerData m_seekRandomizerData;
+
+        [SerializeField]
+        private WaveType m_waveType = WaveType.SIN;
 
 
         public Vector3 StartPos
@@ -97,10 +100,17 @@ namespace V1
             set { m_randomizedDataStatus = value; }
         }
 
-        public bool SinWaveToggle
+        public bool TrigWaveToggle
         {
-            get { return m_sinWaveToggle; }
-            set { m_sinWaveToggle = value; }
+            get { return m_trigWaveToggle; }
+            set { m_trigWaveToggle = value; }
         }
+
+        public WaveType Type
+        {
+            get {return m_waveType;}
+            set {m_waveType = value;}
+        }
+
     }
 }

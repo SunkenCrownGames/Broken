@@ -6,23 +6,23 @@ namespace V1
     public class SeekRandomizerData
     {
         [SerializeField]
-        private Range m_horizontalSpeedRange;
+        private Range m_horizontalSpeedRange = null;
 
         [SerializeField]
-        private Range m_VerticalSpeedRange;
+        private Range m_VerticalSpeedRange = null;
 
         [SerializeField]
-        private Range m_SinWaveRange;
+        private Range m_SinWaveRange= null;
 
         [SerializeField]
-        private float m_horizontalSpeed;
+        private float m_horizontalSpeed = 0;
 
 
         [SerializeField]
-        private float m_verticalSpeed;
+        private float m_verticalSpeed = 0;
 
         [SerializeField]
-        private float m_sinWaveSpeed;
+        private float m_sinWaveSpeed = 0;
 
 
         public void GenerateRandomizedData()

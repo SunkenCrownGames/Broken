@@ -17,6 +17,7 @@ namespace V1
         private EntityHorizontalDirection m_horizontalDirection = EntityHorizontalDirection.RIGHT;
 
         [SerializeField]
+
         private float m_groundedDistance = 0;
 
         private Bounds m_bounds;
@@ -64,17 +65,20 @@ namespace V1
                 Bounds objectBounds = hitObject.GetComponent<Bounds>();
                 float distance = m_bounds.EntityVerticalBounds[0] - objectBounds.EntityVerticalBounds[1];
 
-                if(hit.distance < m_groundedDistance && m_movementState == EntityMovementState.FALLING && m_verticalDirection == EntityVerticalDirection.FALLING)
+                if(m_bounds.EntityVerticalBounds[1] > objectBounds.EntityVerticalBounds[0])
                 {
-                    //Debug.Log("SET GROUNDED");
-                    if(hitObject.CompareTag("Ground"))
+                    if(hit.distance < m_groundedDistance && m_movementState == EntityMovementState.FALLING && m_verticalDirection == EntityVerticalDirection.FALLING)
                     {
-                        Grounded(hitObject);
+                        //Debug.Log("SET GROUNDED");
+                        if(hitObject.CompareTag("Ground"))
+                        {
+                            Grounded(hitObject);
+                        }
                     }
-                }
-                else if(hit.distance > m_groundedDistance)
-                {
-                    Grounded(null);
+                    else if(hit.distance > m_groundedDistance)
+                    {
+                        Grounded(null);
+                    }
                 }
             }
             else
@@ -155,7 +159,6 @@ namespace V1
                     }
                 }
         }
-
         public GameObject PlayerRef
         {
             get { return m_playerRef; }

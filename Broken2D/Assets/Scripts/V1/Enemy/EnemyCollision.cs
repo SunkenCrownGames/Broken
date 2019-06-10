@@ -5,12 +5,14 @@ namespace V1
     public class EnemyCollision : MonoBehaviour
     {
         [SerializeField]
-        private ScreenShakeData m_screenShakeHitData;
+        private ScreenShakeData m_screenShakeHitData = null;
         [SerializeField]
-        private ScreenShakeData m_screenShakeDeathData;
+        private ScreenShakeData m_screenShakeDeathData = null;
 
         private EnemyHealth m_health;
         private EnemyController m_emv;
+        
+        private Entity m_entity;
 
         private static GameManager m_gm;
         private static ScreenShakeManager m_ssm;
@@ -38,6 +40,7 @@ namespace V1
             {
                 m_emv.EnemyInfo.OrbData.SpawnPosition = transform.position;
                 m_gm.OrbEvent.Invoke(m_emv.EnemyInfo.OrbData);
+                m_ssm.ShakeEvent.Invoke(m_screenShakeDeathData);
                 Destroy(this.gameObject);
             }
         }
@@ -47,21 +50,25 @@ namespace V1
         {
             m_health = GetComponent<EnemyHealth>();
             m_emv = GetComponent<EnemyController>();
+            m_entity = GetComponent<Entity>();
 
             GameObject gameManagerObj = GameObject.FindGameObjectWithTag("GameManager");
             if(m_gm == null)
                 m_gm = gameManagerObj.GetComponent<GameManager>();
             if (m_ssm == null)
                 m_ssm = gameManagerObj.GetComponent<ScreenShakeManager>();;
+            
         }
 
         private void BulletTriggerCollision(Collider2D p_other)
         {
-            if(p_other.CompareTag("Bullet"))
+            if(p_other.CompareTag("PlayerBullet"))
             {
                 m_health.m_health -= p_other.gameObject.GetComponent<ProjectileController>().BulletData.BulletDamage;
                 m_ssm.ShakeEvent.Invoke(m_screenShakeHitData);
+                m_entity.ActionState = EntityActionState.HIT;
                 Destroy(p_other.gameObject);
+                m_emv.PatrolData.CurrentStatus = PatrolStatus.CHASING;
             }
         }
         

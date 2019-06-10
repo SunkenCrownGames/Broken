@@ -106,7 +106,7 @@ namespace V1
         private void UpdateCurrency(float val)
         {
             m_currency += val;
-            Debug.Log("Currency Updated + Current Value is: " + m_currency);
+            //Debug.Log("Currency Updated + Current Value is: " + m_currency);
 
             if(m_currency <= 0)
             {

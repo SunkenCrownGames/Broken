@@ -130,14 +130,14 @@ namespace V1
 
         private void Move() 
         {
-            //Debug.Log(m_vVelocity);
-            transform.position += new Vector3(m_playerData.MovementSpeed * Time.deltaTime, m_playerData.VerticalSpeed  * Time.deltaTime);
+                //Debug.Log(m_vVelocity);
+                transform.position += new Vector3(m_playerData.MovementSpeed * Time.deltaTime, m_playerData.VerticalSpeed  * Time.deltaTime);
 
-            UpdateMovementState();
+                UpdateMovementState();
 
-            //If we are moving then deplete from energy
-            if(m_playerMovementState == PlayerMovementState.RUNNING)
-                m_entity.GameManagerRef.CurrencyEvent.Invoke(-m_playerData.CostData.MovementCost);
+                //If we are moving then deplete from energy
+                if(m_playerMovementState == PlayerMovementState.RUNNING)
+                    m_entity.GameManagerRef.CurrencyEvent.Invoke(-m_playerData.CostData.MovementCost);
 
         }
 

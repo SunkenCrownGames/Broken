@@ -13,7 +13,7 @@ namespace V1
         private EnemyPatrolData m_patrolData = null;
 
         [SerializeField]
-        private EnemySeekData m_seekData;
+        private EnemySeekData m_seekData = null;
 
 
         private int m_playerLayer = 0;
@@ -41,11 +41,15 @@ namespace V1
                 if (m_entity.Ground != null)
                 {
                     if (m_patrolData.CurrentStatus != PatrolStatus.CHASING)
+                    {
+                        Detect();
                         Patrol();
+                    }
                     else
+                    {
                         Chase();
-
-                    Detect();
+                        Debug.Log("Chasing");
+                    }
                 }
             }
             else
@@ -119,17 +123,22 @@ namespace V1
 
             GameObject m_playerGround = m_player.GetComponent<Entity>().Ground;
 
-            if (distance > m_enemyData.AttackRange)
+            float range = (m_patrolData.EnemyAttackType == EnemyPatrolAttackType.MELEE) ? m_patrolData.MeleeAttackRange : m_patrolData.RangedAttackRange;
+
+            Debug.Log("The Current Distance Is: " + distance + "\t Range = " + range);
+
+            if (distance > range)
             {
                 m_entity.HorizontalDirection = (xCurrentPos < xPlayerPos) ? EntityHorizontalDirection.RIGHT : EntityHorizontalDirection.LEFT;
                 m_enemyData.Direction = (xCurrentPos < xPlayerPos) ? 1 : -1;
+
             }
             else
             {
                 m_enemyData.Direction = 0;
             }
 
-            if (m_entity.Ground == m_playerGround && m_playerGround != null)
+            if (m_entity.Ground != m_playerGround && m_playerGround != null)
             {
                 m_patrolData.CurrentStatus = PatrolStatus.PATROLLING;
             }
@@ -151,7 +160,7 @@ namespace V1
 
         private void Move()
         {
-            transform.position += new Vector3(m_enemyData.MovementSpeed * m_enemyData.Direction * Time.deltaTime, m_enemyData.VerticalSpeed * Time.deltaTime);
+                transform.position += new Vector3(m_enemyData.MovementSpeed * m_enemyData.Direction * Time.deltaTime, m_enemyData.VerticalSpeed * Time.deltaTime);
         }
         #endregion
 
@@ -184,12 +193,13 @@ namespace V1
             }
 
 
-            if(m_seekData.SinWaveToggle)
+            if(m_seekData.TrigWaveToggle)
             {
+                float val = (m_seekData.Type == WaveType.SIN) ? Mathf.Sin(Time.time * m_seekData.RandomizerData.SinWaveSpeedRandomized) : Mathf.Cos(Time.time * m_seekData.RandomizerData.SinWaveSpeedRandomized);
                 if(m_seekData.RandomizedStatus)
-                    transform.position += transform.up * Mathf.Sin(Time.time * m_seekData.RandomizerData.SinWaveSpeedRandomized) * m_enemyData.Magnitude;
+                    transform.position += transform.up * val * m_enemyData.Magnitude;
                 else
-                    transform.position += transform.up * Mathf.Sin(Time.time * m_enemyData.Frequency) * m_enemyData.Magnitude;
+                    transform.position += transform.up * val * m_enemyData.Magnitude;
             }
         }
         private void StraightMovement()
@@ -224,11 +234,11 @@ namespace V1
             get { return m_enemyData; }
             set { m_enemyData = value; }
         }
-    }
 
-    public enum EnemySeekMovementType
-    {
-        STRAIGHT,
-        BEZIER
+        public EnemyPatrolData PatrolData
+        {
+            get { return m_patrolData; }
+            set { m_patrolData = value; }
+        }
     }
 }

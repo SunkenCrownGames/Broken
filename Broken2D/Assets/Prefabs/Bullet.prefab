@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7350631349976714424}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Bullet
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
     m_bulletCurrentLife: 0
     m_bulletLifeOffset: 1
     m_bulletDirection: 1
-    m_bulletDamage: 50
+    m_bulletDamage: 25
 --- !u!61 &7350631349976714424
 BoxCollider2D:
   m_ObjectHideFlags: 0
