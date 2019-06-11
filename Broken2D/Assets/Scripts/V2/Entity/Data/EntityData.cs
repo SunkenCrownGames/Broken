@@ -26,10 +26,26 @@ namespace V2
         [Tooltip("Distance Between Entity and Ground To Be Considered Grounded")]
         protected float m_groundedDistance;
 
+        [SerializeField]
+        protected HorizontalDirection m_hitDirection;
+
+        [Header("KnockBack Data")]
+        [SerializeField]
+        private EntityKnockBackData m_hitKnockbackData;
+
+        [Header("ScreenShake Data")]
+        [SerializeField]
+        private ScreenShakeData m_hitScreenShakeData;
+        [SerializeField]
+        private ScreenShakeData m_deathScreenShakeData;
+
         //The sprite bounds
         protected Bounds m_bounds;
+
         //The layer that all the ground tiles are on
         protected int m_groundLayerMask;
+
+        [SerializeField]
         //Current Ground Reference
         protected GameObject m_ground;
 
@@ -93,6 +109,31 @@ namespace V2
         {
             get { return m_bounds; }
             set { m_bounds = value; }
+        }
+
+        public EntityKnockBackData KnockBackData
+        {
+            get { return m_hitKnockbackData; }
+            set { m_hitKnockbackData = value; }
+        }
+
+
+        public ScreenShakeData HitScreenShakeData
+        {
+            get { return m_hitScreenShakeData; }
+            set { m_hitScreenShakeData = value; }
+        }
+
+        public ScreenShakeData DeathScreenShakeData
+        {
+            get { return m_deathScreenShakeData; }
+            set { m_deathScreenShakeData = value; }
+        }
+
+        public HorizontalDirection HitDirection
+        {
+            get { return m_hitDirection; }
+            set { m_hitDirection = value; }
         }
     }
 }

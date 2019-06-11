@@ -124,7 +124,7 @@ namespace V2
             if(m_currency <= 0)
             {
                 Debug.Log("Game Over");
-                m_ssm.ShakeEvent.Invoke(m_playerRef.PlayerData.ScreenShakeDeathData);
+                m_ssm.ShakeEvent.Invoke(m_playerRef.EntityData.HitScreenShakeData);
                 Destroy(m_playerRef.gameObject);
                 m_currency = 0;
             }

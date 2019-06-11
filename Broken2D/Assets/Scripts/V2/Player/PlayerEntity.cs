@@ -31,6 +31,10 @@ namespace V2
                 else
                     Dash();
             }
+            else
+            {
+                KnockBack();
+            }
         }
 
         private void UpdateInput()
@@ -174,6 +178,32 @@ namespace V2
             }
             else
                 m_playerData.MovementState = PlayerMovementState.IDLE;  
+        }
+
+        private void KnockBack()
+        {
+            float direction = (m_entityData.HitDirection == HorizontalDirection.LEFT) ? 1 : -1;
+            
+            if(m_entityData.KnockBackData.CurrentDuration < m_entityData.KnockBackData.Duration)
+            {
+                m_entityData.KnockBackData.CurrentDuration += Time.deltaTime;
+            
+                if(!m_entityData.KnockBackData.VerticalKnockbackTrigger)
+                    transform.position += new Vector3(m_entityData.KnockBackData.HorizontalKnockBack * direction * Time.deltaTime, 
+                    0, 0);
+                else
+                    transform.position += new Vector3(m_entityData.KnockBackData.HorizontalKnockBack * direction * Time.deltaTime, 
+                        m_entityData.KnockBackData.VerticalKnockBack  * Time.deltaTime , 0);
+            }
+            else
+            {
+                m_entityData.ActionState = EntityActionState.NONE;
+                m_playerData.MovementData.MovementSpeed = m_entityData.KnockBackData.HorizontalKnockBack * direction;
+                m_entityData.KnockBackData.CurrentDuration = 0;
+
+                if(m_entityData.KnockBackData.VerticalKnockbackTrigger)
+                    m_playerData.MovementData.VerticalSpeed = m_entityData.KnockBackData.VerticalKnockBack;
+            }
         }
 
         public PlayerData PlayerData

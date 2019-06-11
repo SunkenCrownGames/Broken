@@ -18,12 +18,6 @@ namespace V2
         private AbilityCostData m_abilityCostData;
 
         private MovementInputData m_inputData;
-        
-        [SerializeField]
-        private ScreenShakeData m_screenShakeHitData;
-
-        [SerializeField]
-        private ScreenShakeData m_screenShakeDeathData;
 
 
         public PlayerData()
@@ -60,18 +54,6 @@ namespace V2
         {
             get { return m_abilityCostData; }
             set { m_abilityCostData = value; }
-        }
-
-        public ScreenShakeData ScreenShakeHitData
-        {
-            get { return m_screenShakeHitData; }
-            set { m_screenShakeHitData = value; }
-        }
-
-        public ScreenShakeData ScreenShakeDeathData
-        {
-            get { return m_screenShakeDeathData; }
-            set { m_screenShakeDeathData = value; }
         }
     }
 }

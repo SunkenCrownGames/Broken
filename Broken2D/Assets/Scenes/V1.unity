@@ -457,6 +457,86 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitScreenShakeData.m_type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitScreenShakeData.m_duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitScreenShakeData.m_amplitude
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitScreenShakeData.m_maxAmplitude
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitScreenShakeData.m_frequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitScreenShakeData.m_maxFrequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_deathScreenShakeData.m_duration
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_deathScreenShakeData.m_amplitude
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_deathScreenShakeData.m_maxAmplitude
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_deathScreenShakeData.m_frequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_deathScreenShakeData.m_maxFrequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitKnockbackData.m_horizontalKnockBack
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitKnockbackData.m_duration
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_playerData.m_playerMovementData.m_hDecelerationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_playerData.m_playerMovementData.m_vDecelerationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_hitKnockbackData.m_verticalKnockback
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1504800717976335435, guid: 088f7f1282352404eb9a606d66c5d57c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -766,6 +846,28 @@ MonoBehaviour:
     m_horizontalDirection: 1
     m_verticalDirection: 0
     m_groundedDistance: 0.15
+    m_hitDirection: 0
+    m_hitKnockbackData:
+      m_horizontalKnockBack: 1
+      m_verticalKnockback: 0
+      m_currentDuration: 0
+      m_duration: 0.15
+      m_verticalKnockbackTrigger: 0
+    m_hitScreenShakeData:
+      m_type: 1
+      m_duration: 0.13
+      m_amplitude: 0.3
+      m_maxAmplitude: 1
+      m_frequency: 1
+      m_maxFrequency: 1
+    m_deathScreenShakeData:
+      m_type: 0
+      m_duration: 0.1
+      m_amplitude: 2
+      m_maxAmplitude: 1
+      m_frequency: 1
+      m_maxFrequency: 1
+    m_ground: {fileID: 0}
   m_enemyData:
     m_enemyType: 0
     m_movementData:
@@ -805,12 +907,13 @@ MonoBehaviour:
       m_ledgeDistance: 1
       m_patrolStatus: 0
       m_enemyAttackType: 0
-      m_detectionRange: 0.75
-      m_meleeAttackRange: 0.75
+      m_detectionRange: 5
+      m_ledgeStopDistance: 0.3
+      m_meleeAttackRange: 0.15
       m_rangedAttackRange: 2
     m_orbData:
       m_orbType: 1
-      m_orbSeekSpeed: 3
+      m_orbSeekSpeed: 1.5
       m_orbTrackType: 1
 --- !u!114 &6793146629910999516
 MonoBehaviour:
@@ -837,20 +940,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b0c76980793164598fa06514393d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_screenShakeHitData:
-    m_type: 0
-    m_duration: 0
-    m_amplitude: 0
-    m_maxAmplitude: 0
-    m_frequency: 0
-    m_maxFrequency: 0
-  m_screenShakeDeathData:
-    m_type: 0
-    m_duration: 0
-    m_amplitude: 0
-    m_maxAmplitude: 0
-    m_frequency: 0
-    m_maxFrequency: 0
 --- !u!50 &6793146629910999518
 Rigidbody2D:
   serializedVersion: 4

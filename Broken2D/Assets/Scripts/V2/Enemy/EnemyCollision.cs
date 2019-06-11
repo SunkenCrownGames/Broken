@@ -4,11 +4,6 @@ namespace V2
     
     public class EnemyCollision : MonoBehaviour
     {
-        [SerializeField]
-        private ScreenShakeData m_screenShakeHitData = null;
-        [SerializeField]
-        private ScreenShakeData m_screenShakeDeathData = null;
-
         private EnemyHealth m_health;
         private EnemyEntity m_ee;
 
@@ -30,6 +25,11 @@ namespace V2
             PlayerCollision(p_other);
         }
 
+        private void OnCollisionStay2D(Collision2D p_other) 
+        {
+            PlayerCollision(p_other);
+        }
+
 
 
         private void Update()
@@ -38,7 +38,7 @@ namespace V2
             {
                 m_ee.EnemyData.OrbData.SpawnPosition = transform.position;
                 m_gm.OrbEvent.Invoke(m_ee.EnemyData.OrbData);
-                m_ssm.ShakeEvent.Invoke(m_screenShakeDeathData);
+                m_ssm.ShakeEvent.Invoke(m_ee.EntityData.DeathScreenShakeData);
                 Destroy(this.gameObject);
             }
         }
@@ -61,11 +61,17 @@ namespace V2
         {
             if(p_other.CompareTag("PlayerBullet"))
             {
-                m_health.m_health -= p_other.gameObject.GetComponent<ProjectileController>().BulletData.BulletDamage;
-                m_ssm.ShakeEvent.Invoke(m_screenShakeHitData);
+                GameObject bullet = p_other.gameObject;
+                m_health.m_health -= bullet.GetComponent<ProjectileController>().BulletData.BulletDamage;
+                m_ssm.ShakeEvent.Invoke(m_ee.EntityData.HitScreenShakeData);
                 m_ee.EntityData.ActionState = EntityActionState.HIT;
 
-                Destroy(p_other.gameObject);
+                if(bullet.transform.position.x < transform.position.x)
+                    m_ee.EntityData.HitDirection = HorizontalDirection.LEFT;
+                else
+                    m_ee.EntityData.HitDirection = HorizontalDirection.RIGHT;
+
+                Destroy(bullet);
                 m_ee.EnemyData.PatrolData.CurrentStatus = PatrolStatus.CHASING;
             }
         }

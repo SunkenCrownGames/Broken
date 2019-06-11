@@ -20,11 +20,13 @@ namespace V2
         private float m_detectionRange;
 
         [SerializeField]
+        private float m_ledgeStopDistance = 0.3f;
+
+        [SerializeField]
         private float m_meleeAttackRange;
 
         [SerializeField]
         private float m_rangedAttackRange;
-
 
         public float MeleeAttackRange
         {
@@ -60,6 +62,12 @@ namespace V2
         {
             get { return m_detectionRange; }
             set { m_detectionRange = value; }
+        }
+
+        public float LedgeStopDistance
+        {
+            get { return m_ledgeStopDistance; }
+            set { m_ledgeStopDistance = value; }
         }
     }
 }

@@ -1,7 +1,8 @@
 namespace V2
 {
+    using System;
     using UnityEngine;
-    
+
     public class EnemyEntity : Entity
     {
         [SerializeField]
@@ -19,33 +20,42 @@ namespace V2
         protected override void Update()
         {
             base.Update();
-            if (m_enemyData.EnemyType == EnemyType.PATROL)
+            
+            //IF ENEMY WAS NOT HIT
+            if(m_entityData.ActionState != EntityActionState.HIT)
             {
                 UpdateVelocity();
-
-                if (m_entityData.Ground != null)
+                if (m_enemyData.EnemyType == EnemyType.PATROL)
                 {
-                    if (m_enemyData.PatrolData.CurrentStatus != PatrolStatus.CHASING)
+
+                    if (m_entityData.Ground != null)
                     {
-                        Detect();
-                        Patrol();
+                        if (m_enemyData.PatrolData.CurrentStatus != PatrolStatus.CHASING)
+                        {
+                            Detect();
+                            Patrol();
+                        }
+                        else
+                        {
+                            Chase();
+                            Debug.Log("Chasing");
+                        }
                     }
-                    else
-                    {
-                        Chase();
-                        Debug.Log("Chasing");
-                    }
+                }
+                else
+                {
+                    if (m_enemyData.Player != null)
+                        Seek();
                 }
             }
             else
             {
-                if (m_enemyData.Player != null)
-                    Seek();
+                KnockBack();
             }
 
             Move();
-        }
 
+        }
         private void BindObjects()
         {
             m_entityData.Bounds = GetComponent<Bounds>();
@@ -55,6 +65,7 @@ namespace V2
             m_enemyData.SeekData.RandomizerData.GenerateRandomizedData();
         }
 
+        #region Patrol
         private void UpdateVelocity()
         {
             //Update Vertical Velocity If Falling
@@ -77,8 +88,8 @@ namespace V2
             else
                 m_entityData.VDirection = VerticalDirection.NONE;
 
-            
-            if(m_entityData.ActionState != EntityActionState.HIT)
+            if(m_enemyData.PatrolData.CurrentStatus == PatrolStatus.PATROLLING || 
+            (m_enemyData.PatrolData.CurrentStatus == PatrolStatus.CHASING && CheckChaseLedge()))
             {
                 if(m_enemyData.MovementData.MovementSpeed >= m_enemyData.MovementData.MaxMovementSpeed)
                 {
@@ -86,8 +97,12 @@ namespace V2
                 }
                 else
                 {
-                    m_enemyData.MovementData.MovementSpeed += m_enemyData.MovementData.HorizontalAcceleration * Time.deltaTime;
+                        m_enemyData.MovementData.MovementSpeed += m_enemyData.MovementData.HorizontalAcceleration * Time.deltaTime;
                 }
+            }
+            else
+            {
+                m_enemyData.MovementData.MovementSpeed = 0;
             }
         }
 
@@ -121,27 +136,75 @@ namespace V2
 
             GameObject m_playerGround = m_enemyData.Player.GetComponent<PlayerEntity>().EntityData.Ground;
 
+            Bounds groundBounds = m_entityData.Ground.GetComponent<Bounds>();
+
+            float groundEdge = (m_entityData.HDirection == HorizontalDirection.LEFT) ? groundBounds.EntityHorizontalBounds[0] : groundBounds.EntityHorizontalBounds[1];
+
             float range = (m_enemyData.PatrolData.EnemyAttackType == EnemyPatrolAttackType.MELEE) ? m_enemyData.PatrolData.MeleeAttackRange : m_enemyData.PatrolData.RangedAttackRange;
 
-            Debug.Log("The Current Distance Is: " + distance + "\t Range = " + range);
+            //Debug.Log("The Current Distance Is: " + distance + "\t Range = " + range);
 
-            if (distance > range)
-            {
-                m_entityData.HDirection = (xCurrentPos < xPlayerPos) ? HorizontalDirection.RIGHT : HorizontalDirection.LEFT;
-                m_enemyData.MovementData.HorizontalDirection = (xCurrentPos < xPlayerPos) ? 1 : -1;
 
-            }
-            else
-            {
-                m_enemyData.MovementData.HorizontalDirection = 0;
-            }
+                if (distance > range)
+                {
+                    m_entityData.HDirection = (xCurrentPos < xPlayerPos) ? HorizontalDirection.RIGHT : HorizontalDirection.LEFT;
+                    m_enemyData.MovementData.HorizontalDirection = (xCurrentPos < xPlayerPos) ? 1 : -1;
 
-            if (m_entityData.Ground != m_playerGround && m_playerGround != null)
-            {
-                m_enemyData.PatrolData.CurrentStatus = PatrolStatus.PATROLLING;
-            }
+                }
+                else
+                {
+                    m_enemyData.MovementData.HorizontalDirection = 0;
+                }
+
+                if (m_entityData.Ground != m_playerGround && m_playerGround != null)
+                {
+                    m_enemyData.PatrolData.CurrentStatus = PatrolStatus.PATROLLING;
+                }
+
         }
 
+        private bool CheckChaseLedge()
+        {
+            Debug.Log(m_entityData.Ground.name);
+            Bounds groundBounds = m_entityData.Ground.GetComponent<Bounds>();
+            float boundsDistance = (m_entityData.HDirection == HorizontalDirection.LEFT) ? Mathf.Abs(m_entityData.Bounds.EntityHorizontalBounds[0] - groundBounds.EntityHorizontalBounds[0]) :
+            Mathf.Abs(m_entityData.Bounds.EntityHorizontalBounds[1] - groundBounds.EntityHorizontalBounds[1]);
+
+            if(boundsDistance > m_enemyData.PatrolData.LedgeStopDistance)
+                return true;
+            else
+                return false;
+        }
+
+        private void Detect()
+        {
+            Debug.DrawLine(transform.position, transform.position + new Vector3(m_enemyData.PatrolData.DetectionRange, 0, 0), Color.red);
+            RaycastHit2D hit = (m_entityData.HDirection == HorizontalDirection.RIGHT) ?
+            Physics2D.Raycast(transform.position, Vector2.right, m_enemyData.PatrolData.DetectionRange, m_enemyData.PlayerLayer) :
+            Physics2D.Raycast(transform.position, -Vector2.right, m_enemyData.PatrolData.DetectionRange, m_enemyData.PlayerLayer);
+            if (hit.collider != null)
+            {
+                GameObject hitObject = hit.collider.gameObject;
+                m_enemyData.PatrolData.CurrentStatus = PatrolStatus.CHASING;
+            }
+        }
+        #endregion
+
+        #region Seeker Logic
+        private void InitializeSeek()
+        {
+            if (m_enemyData.SeekData.SeekType == EnemySeekMovementType.BEZIER)
+                InitializeBezierSeek();
+        }
+
+        private void InitializeBezierSeek()
+        {
+            m_enemyData.SeekData.StartPos = transform.position;
+            //m_midPoint = (m_player.transform.position + m_startPos) / 2;
+             m_enemyData.SeekData.MidPoint = (new Vector3(m_enemyData.Player.transform.position.x, 0, 0) + m_enemyData.SeekData.StartPos) / 2;
+        }
+
+        
         private void Seek()
         {
             Vector3 direction = m_enemyData.Player.transform.position - transform.position;
@@ -167,21 +230,6 @@ namespace V2
             }
         }
 
-        private void Detect()
-        {
-            Debug.DrawLine(transform.position, transform.position + new Vector3(m_enemyData.PatrolData.DetectionRange, 0, 0), Color.red);
-            RaycastHit2D hit = (m_entityData.HDirection == HorizontalDirection.RIGHT) ?
-            Physics2D.Raycast(transform.position, Vector2.right, m_enemyData.PatrolData.DetectionRange, m_enemyData.PlayerLayer) :
-            Physics2D.Raycast(transform.position, -Vector2.right, m_enemyData.PatrolData.DetectionRange, m_enemyData.PlayerLayer);
-            if (hit.collider != null)
-            {
-                GameObject hitObject = hit.collider.gameObject;
-                m_enemyData.PatrolData.CurrentStatus = PatrolStatus.CHASING;
-            }
-        }
-
-
-
         private void StraightMovement()
         {
             float deltaSpeed = m_enemyData.MovementData.MovementSpeed * Time.deltaTime;
@@ -205,32 +253,32 @@ namespace V2
             transform.position = BezierCurve.CalculateBezierPoint(m_enemyData.SeekData.CurrentDuration / m_enemyData.SeekData.Duration, m_enemyData.SeekData.StartPos, m_enemyData.SeekData.MidPoint, m_enemyData.Player.transform.position);
         }
         
-        private void Move()
-        {
-            if(m_entityData.ActionState == EntityActionState.HIT)
-            {
-                
-            }
-            else
-                transform.position += new Vector3(m_enemyData.MovementData.MovementSpeed * m_enemyData.MovementData.HorizontalDirection * Time.deltaTime, m_enemyData.MovementData.VerticalSpeed * Time.deltaTime);
-        }
-
-
-        #region Seeker Logic
-        private void InitializeSeek()
-        {
-            if (m_enemyData.SeekData.SeekType == EnemySeekMovementType.BEZIER)
-                InitializeBezierSeek();
-        }
-
-        private void InitializeBezierSeek()
-        {
-            m_enemyData.SeekData.StartPos = transform.position;
-            //m_midPoint = (m_player.transform.position + m_startPos) / 2;
-             m_enemyData.SeekData.MidPoint = (new Vector3(m_enemyData.Player.transform.position.x, 0, 0) + m_enemyData.SeekData.StartPos) / 2;
-        }
 
         #endregion
+
+
+        private void KnockBack()
+        {
+            float direction = (m_entityData.HitDirection == HorizontalDirection.LEFT) ? 1 : -1;
+            
+            if(m_entityData.KnockBackData.CurrentDuration < m_entityData.KnockBackData.Duration)
+            {
+                m_entityData.KnockBackData.CurrentDuration += Time.deltaTime;
+                transform.position += new Vector3(m_entityData.KnockBackData.HorizontalKnockBack * direction * Time.deltaTime, 0 , 0);
+            }
+            else
+            {
+                m_entityData.ActionState = EntityActionState.NONE;
+                m_enemyData.MovementData.MovementSpeed = m_entityData.KnockBackData.HorizontalKnockBack * direction;
+                m_entityData.KnockBackData.CurrentDuration = 0;
+            }
+        }
+
+
+        private void Move()
+        {
+                transform.position += new Vector3(m_enemyData.MovementData.MovementSpeed * m_enemyData.MovementData.HorizontalDirection * Time.deltaTime, m_enemyData.MovementData.VerticalSpeed * Time.deltaTime);
+        }
 
         public EnemyData EnemyData
         {

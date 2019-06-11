@@ -60,7 +60,7 @@ namespace V2
             m_currentDuration += Time.deltaTime;
             //m_midPoint = (m_player.transform.position + m_startPos) / 2;
             m_midPoint = (new Vector3(m_player.transform.position.x, 0, 0) + m_startPos) / 2;
-            transform.position = BezierCurve.CalculateBezierPoint(m_currentDuration / m_duration, m_startPos, m_midPoint, m_player.transform.position);
+            transform.position = BezierCurve.CalculateBezierPoint(m_currentDuration * m_orbData.SeekSpeed / m_duration, m_startPos, m_midPoint, m_player.transform.position);
         }
 
         public OrbSpawnData OrbData

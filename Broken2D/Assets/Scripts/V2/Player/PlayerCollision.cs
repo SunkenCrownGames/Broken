@@ -36,7 +36,20 @@ namespace V2
         {
             if(p_other.gameObject.CompareTag("Enemy"))
             {
-                m_ssm.ShakeEvent.Invoke(m_pe.PlayerData.ScreenShakeHitData);
+                GameObject enemyObj = p_other.gameObject;
+                EnemyEntity ee = enemyObj.GetComponent<EnemyEntity>();
+                m_pe.EntityData.ActionState = EntityActionState.HIT;
+                m_ssm.ShakeEvent.Invoke(m_pe.EntityData.HitScreenShakeData);
+
+                if(enemyObj.transform.position.y < transform.position.y)
+                    m_pe.EntityData.KnockBackData.VerticalKnockbackTrigger = true;
+                else
+                    m_pe.EntityData.KnockBackData.VerticalKnockbackTrigger = false;
+                    
+                if(enemyObj.transform.position.x < transform.position.x)
+                    m_pe.EntityData.HitDirection = HorizontalDirection.LEFT;
+                else
+                    m_pe.EntityData.HitDirection = HorizontalDirection.RIGHT;
             }
         }
 
