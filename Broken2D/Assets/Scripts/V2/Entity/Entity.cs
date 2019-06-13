@@ -7,11 +7,8 @@ namespace V2
         [SerializeField]
         protected EntityData m_entityData;
 
-        public EntityData Data
-        {
-            get { return m_entityData; }
-            set { m_entityData = value; }
-        }
+        [SerializeField]
+        protected EntityLogicData m_entityLogicData;
 
         protected virtual void Awake()
         {
@@ -26,30 +23,30 @@ namespace V2
 
         private void BindObjects()
         {
-            if(m_entityData.GM == null)
-                m_entityData.GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-            
-            m_entityData.EntityBounds = GetComponent<Bounds>();
-            m_entityData.GroundLayerMask = LayerMask.GetMask("ENV");
+            if(m_entityLogicData == null)
+                m_entityLogicData = new EntityLogicData();
+                
+            m_entityLogicData.Bounds = GetComponent<Bounds>();
+            m_entityLogicData.GroundLayerMask = LayerMask.GetMask("ENV");
         }
 
         private void Grounded(GameObject p_object)
         {
-            m_entityData.Ground = p_object;
+            m_entityLogicData.GroundObject = p_object;
         }
 
         //This Function Checks If The Player Has Hit The Ground By Firing a Ray Downwards
         private void CheckGrounded()
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, m_entityData.GroundLayerMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, m_entityLogicData.GroundLayerMask);
 
             if (hit.collider != null && transform.position.y > hit.point.y)
             {
                 GameObject hitObject = hit.collider.gameObject;
                 Bounds objectBounds = hitObject.GetComponent<Bounds>();
-                float distance = m_entityData.EntityBounds.EntityVerticalBounds[0] - objectBounds.EntityVerticalBounds[1];
+                float distance = m_entityLogicData.Bounds.EntityVerticalBounds[0] - objectBounds.EntityVerticalBounds[1];
 
-                if(m_entityData.EntityBounds.EntityVerticalBounds[1] > objectBounds.EntityVerticalBounds[0])
+                if(m_entityLogicData.Bounds.EntityVerticalBounds[1] > objectBounds.EntityVerticalBounds[0])
                 {
                     if(hit.distance < m_entityData.GroundedDistance && m_entityData.MovementState == EntityMovementState.FALLING && m_entityData.VDirection == VerticalDirection.DOWN)
                     {
@@ -75,7 +72,7 @@ namespace V2
         private void UpdateMovementState()
         {
                 //If we are not grounded
-                if(m_entityData.Ground == null)
+                if(m_entityLogicData.GroundObject == null)
                 {
                     //If we are not jumping
                     if(m_entityData.MovementState != EntityMovementState.JUMPING)
@@ -93,6 +90,12 @@ namespace V2
         {
             get { return m_entityData; }
             set { m_entityData = value; }
+        }
+
+        public EntityLogicData LogicData
+        {
+            get { return m_entityLogicData; }
+            set { m_entityLogicData = value; }
         }
     }
 }

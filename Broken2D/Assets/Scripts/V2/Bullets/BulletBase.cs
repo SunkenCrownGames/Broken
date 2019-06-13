@@ -17,12 +17,22 @@ namespace V2
         protected float m_bulletLifeOffset = 1;
 
         [SerializeField]
-        protected float m_bulletDirection;
+        protected float m_bulletHDirection;
+
+        [SerializeField]
+        protected float m_bulletVDirection;
 
         [SerializeField]
         protected float m_bulletDamage;
-        
-
+    
+        public void SetBulletData(ShootingData p_shootingData)
+        {
+            m_bulletSpeed = p_shootingData.BulletSpeed;
+            m_bulletLifeTime = p_shootingData.LifeTime;
+            m_bulletCurrentLife = p_shootingData.CurrentLifeTime;
+            m_bulletLifeOffset = p_shootingData.LifeOffset;
+            m_bulletDamage = p_shootingData.BulletDamage;
+        }
         public float Speed
         {
             get { return m_bulletSpeed; }
@@ -48,10 +58,16 @@ namespace V2
             set { m_bulletLifeOffset = value; }
         }
 
-        public float Direction
+        public float HDirection
         {
-            get { return m_bulletDirection; }
-            set { m_bulletDirection = value; }
+            get { return m_bulletHDirection; }
+            set { m_bulletHDirection = value; }
+        }
+
+        public float VDirection
+        {
+            get { return m_bulletVDirection; }
+            set { m_bulletVDirection = value; }
         }
 
         public float BulletDamage

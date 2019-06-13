@@ -537,6 +537,11 @@ PrefabInstance:
       propertyPath: m_entityData.m_hitKnockbackData.m_verticalKnockback
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1504800717976335432, guid: 088f7f1282352404eb9a606d66c5d57c,
+        type: 3}
+      propertyPath: m_entityData.m_groundedDistance
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 1504800717976335435, guid: 088f7f1282352404eb9a606d66c5d57c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -867,7 +872,6 @@ MonoBehaviour:
       m_maxAmplitude: 1
       m_frequency: 1
       m_maxFrequency: 1
-    m_ground: {fileID: 0}
   m_enemyData:
     m_enemyType: 0
     m_movementData:

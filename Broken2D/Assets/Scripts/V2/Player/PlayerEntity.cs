@@ -1,7 +1,8 @@
 namespace V2
 {
     using UnityEngine;
-    
+    using Newtonsoft.Json;
+
     public class PlayerEntity : Entity
     {
         [SerializeField]
@@ -10,9 +11,7 @@ namespace V2
         protected override void Awake() 
         {
             base.Awake();
-
-            if(m_playerData == null)
-                m_playerData = new PlayerData();
+            SerializedEntityData();
         }
 
         protected override void Update()
@@ -36,7 +35,7 @@ namespace V2
                 KnockBack();
             }
         }
-
+        
         private void UpdateInput()
         {
             m_playerData.InputData.HorizontalInput = Input.GetAxisRaw("Horizontal");
@@ -49,7 +48,7 @@ namespace V2
             {
                 //Debug.Log(m_playerData.VerticalSpeed);
                 if(m_playerData.MovementData.VerticalSpeed > -m_playerData.MovementData.MaxFallSpeed)
-                    m_playerData.MovementData.VerticalSpeed -= m_entityData.GM.GravityScale * Time.deltaTime;
+                    m_playerData.MovementData.VerticalSpeed -= LogicData.GM.GravityScale * Time.deltaTime;
             }
             else if(m_entityData.MovementState != EntityMovementState.JUMPING)
             {
@@ -104,7 +103,7 @@ namespace V2
                 m_playerData.JumpData.JumpDestination = transform.position.y + m_playerData.MovementData.JumpHeight;
                 m_playerData.JumpData.InitialPosition = transform.position.y;
                 m_playerData.MovementData.VerticalSpeed = m_playerData.MovementData.JumpSpeed;
-                m_entityData.GM.CurrencyEvent.Invoke(-m_playerData.CostData.JumpCost);
+                LogicData.GM.CurrencyEvent.Invoke(-m_playerData.CostData.JumpCost);
             }
         }
 
@@ -119,7 +118,7 @@ namespace V2
                     
                     float direction = (m_entityData.HDirection == HorizontalDirection.LEFT) ? -1 : 1.0f;
                     m_playerData.MovementData.DashInfo.DashDestination = transform.position.x + (m_playerData.MovementData.DashInfo.DashLength * direction);
-                    m_entityData.GM.CurrencyEvent.Invoke(-m_playerData.CostData.DashCost);
+                    m_entityLogicData.GM.CurrencyEvent.Invoke(-m_playerData.CostData.DashCost);
                 }
             }
         }
@@ -133,7 +132,7 @@ namespace V2
 
                 //If we are moving then deplete from energy
                 if(m_playerData.MovementState == PlayerMovementState.RUNNING)
-                    m_entityData.GM.CurrencyEvent.Invoke(-m_playerData.CostData.MovementCost);
+                    m_entityLogicData.GM.CurrencyEvent.Invoke(-m_playerData.CostData.MovementCost);
 
         }
 
@@ -209,6 +208,21 @@ namespace V2
         public PlayerData PlayerData
         {
             get { return m_playerData; }
+        }
+
+        public EntityData EntData
+        {
+            get { return m_entityData; }
+        }
+
+        public string SerializedEntityData()
+        {
+            return JsonConvert.SerializeObject(m_entityData);
+        }
+
+        public string SerializedPlayerData()
+        {
+            return JsonConvert.SerializeObject(m_playerData);
         }
     }
 }

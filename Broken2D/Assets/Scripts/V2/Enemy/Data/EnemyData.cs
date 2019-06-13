@@ -23,7 +23,6 @@ namespace V2
         [SerializeField]
         private EnemyOrbData m_orbData;
 
-
         private static GameObject m_player;
 
         private int m_playerLayer;
@@ -75,6 +74,5 @@ namespace V2
             get { return m_player; }
             set { m_player = value; }
         }
-
     }
 }

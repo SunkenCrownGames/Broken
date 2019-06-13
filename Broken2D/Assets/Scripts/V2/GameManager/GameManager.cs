@@ -8,7 +8,8 @@ namespace V2
     public class GameManager : MonoBehaviour 
     {
 
-        public PlayerEntity m_playerRef;
+        private PlayerEntity m_playerRef;
+
         public TextMeshProUGUI m_currencyValDebug;
 
         [SerializeField]
@@ -114,6 +115,7 @@ namespace V2
         private void BindObjects()
         {
             m_ssm = GetComponent<ScreenShakeManager>();
+            m_playerRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
         }
 
         private void UpdateCurrency(float val)

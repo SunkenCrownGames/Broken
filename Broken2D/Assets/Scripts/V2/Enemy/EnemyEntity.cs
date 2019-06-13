@@ -28,7 +28,7 @@ namespace V2
                 if (m_enemyData.EnemyType == EnemyType.PATROL)
                 {
 
-                    if (m_entityData.Ground != null)
+                    if (m_entityLogicData.GroundObject != null)
                     {
                         if (m_enemyData.PatrolData.CurrentStatus != PatrolStatus.CHASING)
                         {
@@ -58,11 +58,14 @@ namespace V2
         }
         private void BindObjects()
         {
-            m_entityData.Bounds = GetComponent<Bounds>();
+            m_entityLogicData.Bounds = GetComponent<Bounds>();
             m_enemyData.PlayerLayer = LayerMask.GetMask("PLAYER");
             if(m_enemyData.Player == null)
               m_enemyData.Player = GameObject.FindGameObjectWithTag("Player");
             m_enemyData.SeekData.RandomizerData.GenerateRandomizedData();
+
+            if(m_entityLogicData.GM == null)
+                m_entityLogicData.GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
 
         #region Patrol
@@ -73,7 +76,7 @@ namespace V2
             {
                 //Debug.Log(m_playerData.VerticalSpeed);
                 if (m_enemyData.MovementData.VerticalSpeed > -m_enemyData.MovementData.MaxFallSpeed)
-                    m_enemyData.MovementData.VerticalSpeed -= m_entityData.GM.GravityScale * Time.deltaTime;
+                    m_enemyData.MovementData.VerticalSpeed -= m_entityLogicData.GM.GravityScale * Time.deltaTime;
             }
             else if (m_entityData.MovementState != EntityMovementState.JUMPING)
             {
@@ -109,8 +112,8 @@ namespace V2
         private void Patrol()
         {
             float distance = (m_entityData.HDirection == HorizontalDirection.RIGHT) ? 
-            Mathf.Abs(m_entityData.Ground.GetComponent<Bounds>().EntityHorizontalBounds[1] - m_entityData.Bounds.EntityHorizontalBounds[1]) : 
-            Mathf.Abs(m_entityData.Ground.GetComponent<Bounds>().EntityHorizontalBounds[0] - m_enemyData.Bounds.EntityHorizontalBounds[0]);
+            Mathf.Abs(m_entityLogicData.GroundObject.GetComponent<Bounds>().EntityHorizontalBounds[1] - m_entityLogicData.Bounds.EntityHorizontalBounds[1]) : 
+            Mathf.Abs(m_entityLogicData.GroundObject.GetComponent<Bounds>().EntityHorizontalBounds[0] - m_enemyData.Bounds.EntityHorizontalBounds[0]);
             m_enemyData.MovementData.HorizontalDirection = (m_entityData.HDirection == HorizontalDirection.RIGHT) ? 1.0f : -1.0f;
 
 
@@ -134,9 +137,9 @@ namespace V2
             float xCurrentPos = transform.position.x;
             float distance = Mathf.Abs(xCurrentPos - xPlayerPos);
 
-            GameObject m_playerGround = m_enemyData.Player.GetComponent<PlayerEntity>().EntityData.Ground;
+            GameObject m_playerGround = m_enemyData.Player.GetComponent<PlayerEntity>().LogicData.GroundObject;
 
-            Bounds groundBounds = m_entityData.Ground.GetComponent<Bounds>();
+            Bounds groundBounds = m_entityLogicData.GroundObject.GetComponent<Bounds>();
 
             float groundEdge = (m_entityData.HDirection == HorizontalDirection.LEFT) ? groundBounds.EntityHorizontalBounds[0] : groundBounds.EntityHorizontalBounds[1];
 
@@ -156,7 +159,7 @@ namespace V2
                     m_enemyData.MovementData.HorizontalDirection = 0;
                 }
 
-                if (m_entityData.Ground != m_playerGround && m_playerGround != null)
+                if (m_entityLogicData.GroundObject != m_playerGround && m_playerGround != null)
                 {
                     m_enemyData.PatrolData.CurrentStatus = PatrolStatus.PATROLLING;
                 }
@@ -165,10 +168,10 @@ namespace V2
 
         private bool CheckChaseLedge()
         {
-            Debug.Log(m_entityData.Ground.name);
-            Bounds groundBounds = m_entityData.Ground.GetComponent<Bounds>();
-            float boundsDistance = (m_entityData.HDirection == HorizontalDirection.LEFT) ? Mathf.Abs(m_entityData.Bounds.EntityHorizontalBounds[0] - groundBounds.EntityHorizontalBounds[0]) :
-            Mathf.Abs(m_entityData.Bounds.EntityHorizontalBounds[1] - groundBounds.EntityHorizontalBounds[1]);
+            Debug.Log(m_entityLogicData.GroundObject.name);
+            Bounds groundBounds = m_entityLogicData.GroundObject.GetComponent<Bounds>();
+            float boundsDistance = (m_entityData.HDirection == HorizontalDirection.LEFT) ? Mathf.Abs(m_entityLogicData.Bounds.EntityHorizontalBounds[0] - groundBounds.EntityHorizontalBounds[0]) :
+            Mathf.Abs(m_entityLogicData.Bounds.EntityHorizontalBounds[1] - groundBounds.EntityHorizontalBounds[1]);
 
             if(boundsDistance > m_enemyData.PatrolData.LedgeStopDistance)
                 return true;

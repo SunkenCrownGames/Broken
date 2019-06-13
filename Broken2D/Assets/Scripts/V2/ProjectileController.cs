@@ -21,7 +21,8 @@ namespace V2
 
         private void Move()
         {
-            transform.Translate( new Vector3(m_bulletData.Direction * m_bulletData.Speed * Time.deltaTime, 0, 0));
+            transform.Translate( new Vector3(m_bulletData.HDirection * m_bulletData.Speed * Time.deltaTime, m_bulletData.VDirection * m_bulletData.Speed * Time.deltaTime, 0));
+            //transform.Translate(transform.right * m_bulletData.Speed * Time.deltaTime);
         }
 
         private void LifeTime()

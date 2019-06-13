@@ -6,6 +6,9 @@ namespace V2
     public class PlayerData
     {
         [SerializeField]
+        private ShootingData m_shootingData;
+
+        [SerializeField]
         private PlayerMovementState m_playerMovementState;
         
         [SerializeField]
@@ -54,6 +57,12 @@ namespace V2
         {
             get { return m_abilityCostData; }
             set { m_abilityCostData = value; }
+        }
+        
+        public ShootingData ShootingData
+        {
+            get { return m_shootingData; }
+            set { m_shootingData = value; }
         }
     }
 }

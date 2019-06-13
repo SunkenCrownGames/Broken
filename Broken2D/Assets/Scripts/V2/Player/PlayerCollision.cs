@@ -27,7 +27,7 @@ namespace V2
             if(other.CompareTag("CurrencyOrb"))
             {
                 EntityEnergy energyData = other.gameObject.GetComponent<EntityEnergy>();
-                m_pe.EntityData.GM.CurrencyEvent.Invoke(energyData.EnergyValue);
+                m_pe.LogicData.GM.CurrencyEvent.Invoke(energyData.EnergyValue);
                 other.gameObject.SetActive(false);
             }
         }
