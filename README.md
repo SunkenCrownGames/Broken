@@ -7,8 +7,7 @@
 * KnockBack
 * Version 1 Fully Implemented
 
-##Version 2.2 Features To Implement
-
+## Version 2.2 Features To Implement
 ~~Parsing Player To JSON string~~\
 ~~Saving Player JSON Data To File~~\
 Read Player JSON Data\
